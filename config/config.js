@@ -14,7 +14,7 @@ module.exports = {
     dialect: "mysql"
   },
   production: {
-    username: precess.env.DB_USERNAME,
+    username: process.env.DB_USERNAME,
     password: process.env.PASSWORD,
     database: process.env.DB,
     host: process.env.HOST,
