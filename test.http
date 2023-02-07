@@ -1,4 +1,10 @@
+###heroku 배포 test
 GET https://simsimhaekoon-api-app.herokuapp.com/api/members
+###test route test
+GET http://localhost:3000/test/members
+###login route test
+GET http://localhost:3000/login/members
+
 
 ###
 POST https://simsimhaekoon-api-app.herokuapp.com/api/members
@@ -15,6 +21,32 @@ Content-Type: application/json
   "birthday": "1994/11/08",
   "profileImage": "profile11.png"
 }
+###
+POST http://localhost:3000/test/members
+Content-Type: application/json
+
+{
+  "id": 11,
+  "name": "Test",
+  "team": "engineering",
+  "position": "Server Developer",
+  "emailAddress": "TEst@google.com",
+  "phoneNumber": "010-xxxx-xxxx",
+  "admissionDate": "2018/12/10",
+  "birthday": "1994/11/08",
+  "profileImage": "profile11.png"
+}
+
+###
+POST http://localhost:3000/login/members
+Content-Type: application/json
+
+{
+  "userId": "TestUser22",
+  "pw": "testpw22",
+  "name": "Tester22",
+  "emailAddress": "TEst22@google.com"
+}
 
 ###
 PUT https://simsimhaekoon-api-app.herokuapp.com/api/members/1
@@ -23,7 +55,30 @@ Content-Type: application/json
   {
     "name": "PUTTest33"
   }
+###
+PUT http://localhost:3000/test/members/1
+Content-Type: application/json
+
+  {
+    "name": "PUTTest33"
+  }
+
+
 
 ###
 DELETE https://simsimhaekoon-api-app.herokuapp.com/api/members/11
+###
+DELETE http://localhost:3000/test/members/20
   
+
+###로그인 시도
+POST http://localhost:3000/login/signIn
+Content-Type: application/json
+
+{
+  "userId": "TestUser22",
+  "pw": "testpw22"
+}
+
+###로그아웃
+GET http://localhost:3000/login/logOut
