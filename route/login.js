@@ -73,7 +73,7 @@ router.post('/signUp', async (req, res) => {
     const newUser = req.body;
     const user = User.build(newUser);
     await user.save();
-    res.send(newUser);
+    res.redirect("http://localhost:8000");
 });
 
 module.exports = router;

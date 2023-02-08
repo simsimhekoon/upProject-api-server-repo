@@ -82,3 +82,15 @@ Content-Type: application/json
 
 ###로그아웃
 GET http://localhost:3000/login/logOut
+
+###jwt로그인 시도
+POST http://localhost:3000/jwtLogin/signIn
+Content-Type: application/json
+
+{
+  "userId": "TestUser22",
+  "pw": "testpw22"
+}
+
+###jwt로그아웃
+GET http://localhost:3000/jwtLogin/logOut

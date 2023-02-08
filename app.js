@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+const jwtLoginRouter = require('./route/jwtLogin.js');
 const loginRouter = require('./route/login.js');
 const testRouter = require('./route/test.js');
 
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
     res.send('URL should contain /api(test) || login/...');
 });
 
+app.use("/jwtLogin", jwtLoginRouter);
 app.use('/login', loginRouter);
 app.use('/test', testRouter);
 
