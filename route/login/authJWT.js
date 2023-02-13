@@ -18,10 +18,17 @@ const authJWT = (req, res, next) => {
     } else {
       // 검증에 실패하거나 토큰이 만료되었다면 클라이언트에게 메세지를 담아서 응답합니다.
       console.log("유효성 검증되지 않음");
-      res.status(401).send({
-        ok: false,
-        message: result.message, // jwt가 만료되었다면 메세지는 'jwt expired'입니다.
-      });
+
+      if (result.message == "jwt expired"){//유효성 검사의 실패사유가 jwt만료일 경우 로그아웃
+        res.clearCookie("jwt_user");
+        console.log("토큰 만료로 인해 로그아웃 되었습니다");
+        res.redirect("http://localhost:8000");
+      } else {
+        res.status(401).send({
+          ok: false,
+          message: result.message, // jwt가 만료되었다면 메세지는 'jwt expired'입니다.
+        });
+      }
     }
   }
 };

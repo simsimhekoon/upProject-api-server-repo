@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const jwt = require("./JWT");
+const { verify } = require("./JWT");
 const authJwt = require("./authJWT");
 
 const cookieParser = require("cookie-parser");
@@ -15,10 +16,26 @@ router.use(cookieParser());
 
 //로그인 시도
 router.post('/signIn', async (req, res) => {
-    if(req.cookies.jwt_user){
-      console.log("이미 로그인 되어 있습니다.");
-      res.redirect("http://localhost:8000");
-    } else{
+    if(req.cookies.jwt_user){ //로그인을 시도했을때 토큰이 있다면 이미로그인되었다고 알리며, 토큰이 만료되었을땐 로그아웃시킨다.
+      const token = req.cookies.jwt_user;
+      const result = verify(token);
+
+      if (result.ok) {
+        console.log("이미 로그인 되어 있습니다.");
+        res.redirect("http://localhost:8000");
+      } else {
+        if (result.message == "jwt expired") {
+          res.clearCookie("jwt_user");
+          console.log("토큰 만료로 인해 로그아웃 되었습니다");
+          res.redirect("http://localhost:8000");
+        } else {
+          res.status(401).send({
+            ok: false,
+            message: result.message, 
+          });
+        }        
+      }
+    } else{ //토큰이 없을때는 바로 로그인
       const { userId, pw } = req.body;
       const [user] = await User.findAll({ where: { userId, pw } });
       if (user) {
