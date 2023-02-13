@@ -3,7 +3,7 @@ const router = express.Router();
 const session = require('express-session');
 const memoryStore = require('memorystore')(session);
 
-const db = require("../models");
+const db = require("../../models");
 const { User } = db;
 
 router.use(express.json());
@@ -44,8 +44,9 @@ router.get('/members', async (req, res) => {
 //로그인 시도
 router.post('/signIn', async (req, res) => {
     const { userId, pw } = req.body;
-    const [user] = await User.findAll({ where: { userId, pw } });
+    const user = await User.findOne({ where: { userId, pw } });
     if(user){
+        console.log(user);
         console.log("로그인 되었습니다");
         req.session.user = user;
         // console.log(req.session);
