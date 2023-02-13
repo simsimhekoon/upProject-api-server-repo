@@ -15,24 +15,29 @@ router.use(cookieParser());
 
 //로그인 시도
 router.post('/signIn', async (req, res) => {
-    const { userId, pw } = req.body;
-    const [user] = await User.findAll({ where: { userId, pw } });
-    if(user){
-      console.log("로그인 되었습니다");
-      const payload = {
-        num: user.id,
-        id: user.userId,
-        name: user.name,
-      };
-
-      const token = jwt.createToken(payload);
-
-      // set cookie
-      res.cookie("jwt_user", token, {httpOnly: true,});
+    if(req.cookies.jwt_user){
+      console.log("이미 로그인 되어 있습니다.");
       res.redirect("http://localhost:8000");
-    }else{
+    } else{
+      const { userId, pw } = req.body;
+      const [user] = await User.findAll({ where: { userId, pw } });
+      if (user) {
+        console.log("로그인 되었습니다");
+        const payload = {
+          num: user.id,
+          id: user.userId,
+          name: user.name,
+        };
+
+        const token = jwt.createToken(payload);
+
+        // set cookie
+        res.cookie("jwt_user", token, { httpOnly: true });
+        res.redirect("http://localhost:8000");
+      } else {
         // res.redirect('/user/login?msg=등록되지 않은 사용자 입니다');
         console.log("등록된 사용자가 아니거나 비밀번호가 틀렸습니다");
+      }
     }
 });
 
