@@ -43,7 +43,13 @@ router.post('/signIn', async (req, res) => {
 
 //로그아웃
 router.get('/logOut', async (req, res) => {
-    res.clearCookie("jwt_user");
+    if(req.cookies.jwt_user){
+      res.clearCookie("jwt_user");
+      console.log("로그아웃 되었습니다");
+    } else {
+      console.log("로그인 되어있지 않습니다.");
+    }
+
     res.redirect("http://localhost:8000");
 });
 
