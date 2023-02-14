@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 
 const db = require("../../models");
 const { User } = db;
+const { RefreshToken } = db;
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -34,6 +35,12 @@ router.get("/delete", authJwt, async (req, res) => {
 
   const id = req.num;
   const deletedCount = await User.destroy({ where: { id } });
+
+  const token = req.cookies.jwt_user; // header에서 access token을 가져옵니다.
+  const result = jwt.decodeToken(token);
+  const userId = result.id;
+
+  const deletedRefresh = await RefreshToken.destroy({ where: { userId } });
 
   res.clearCookie("jwt_user");
 

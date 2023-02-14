@@ -36,8 +36,8 @@ function verify(token) {
 }
 
 //refresh토큰 발급
-function refresh() {
-  return jwt.sign({}, secretKey, option);
+function createRefresh() {
+  return jwt.sign({}, secretKey, {expiresIn: '24h'});
 }
 
 //refresh토큰 유혀성
@@ -46,4 +46,4 @@ function refreshVerify() {
 }
 
 
-module.exports = { createToken, decodeToken, verify, refresh, refreshVerify};
+module.exports = { createToken, decodeToken, verify, createRefresh, refreshVerify};

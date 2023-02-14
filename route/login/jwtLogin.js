@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 
 const db = require("../../models");
 const { User } = db;
+const { RefreshToken } = db;
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -48,9 +49,19 @@ router.post('/signIn', async (req, res) => {
       };
 
       const token = jwt.createToken(payload);
+      const refreshToken = jwt.createRefresh();
 
       // set cookie
       res.cookie("jwt_user", token, { httpOnly: true });
+
+      // refresh save
+      const buildRefresh = {
+        userId: user.userId,
+        token: refreshToken,
+      };
+
+      const refreshSave = RefreshToken.build(buildRefresh);
+      await refreshSave.save();
 
       console.log("로그인 되었습니다");
       res.send("<script>alert('로그인 성공!!!');location.href='/home';</script>");
@@ -64,8 +75,16 @@ router.post('/signIn', async (req, res) => {
 //로그아웃
 router.get('/logOut', async (req, res) => {
   if (req.cookies.jwt_user) {
+    const token = req.cookies.jwt_user; // header에서 access token을 가져옵니다.
+    const result = jwt.decodeToken(token);
+    const userId = result.id;
+
+    const deletedRefresh = await RefreshToken.destroy({ where: { userId } });
     res.clearCookie("jwt_user");
-    res.send("<script>alert('로그아웃 되었습니다.');location.href='/';</script>");
+
+    res.send(
+      "<script>alert('로그아웃 되었습니다.');location.href='/';</script>"
+    );
   } else {
     res.send("<script>alert('로그인 되어있지 않습니다.');location.href='/';</script>");
   }
