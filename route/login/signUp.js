@@ -18,7 +18,7 @@ router.post("/signUp", async (req, res) => {
   const newUser = req.body;
   const userId = newUser.userId;
   const [currentMember] = await User.findAll({ where: { userId } });
-  console.log(currentMember);
+
   if(!currentMember){
     const user = User.build(newUser);
     await user.save();
