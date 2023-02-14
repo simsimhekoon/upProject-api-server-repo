@@ -88,11 +88,13 @@ router.get('/profile', authJwt, async (req, res) => {
   console.log("유효성 검사 성공");
   const id = req.num;
   const editProfile = await User.findOne({ where: { id } });
+  console.log(editProfile);
 
-  res.send({
-    editProfile,
-    message: "profile access success!",
-  });
+  res.render('profile', { Profile: editProfile });
+  // res.send({
+  //   editProfile,
+  //   message: "profile access success!",
+  // });
 });
 
 

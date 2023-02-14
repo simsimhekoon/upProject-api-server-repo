@@ -14,19 +14,25 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim nesciunt excepturi reprehenderit voluptatem a ducimus, totam placeat maxime et, magni facere commodi ullam. Est dolorem cumque, maxime at modi ratione!</p>
     <p><%= 10 * 8 %></p>
 
+    <h2>로그인</h2>
     <form action="/login/jwtLogin/signIn" id="loginTest" method="post">
-        ID <input type="text" name="userId" id="userId" value="TestUser22">
-        PW <input type="text" name="pw" id="pw" value="testpw22">
+        ID <input type="text" name="userId" id="userId">
+        <br>
+        PW <input type="text" name="pw" id="pw">
         <button type="submit" form="loginTest">signIn!!!</button>
     </form>
 
     <br>
+    <br>
 
+    <h2>회원가입</h2>
     <form action="/login/signUp/signUp" id="createtest" method="post">
         new id<input type="text" name="userId" id="userId">
+        <br>
         pw<input type="text" name="pw" id="pw">
         <br>
         name<input type="text" name="name" id="name">
+        <br>
         email<input type="text" name="emailAddress" id="emailAddress">
         <button type="submit" form="createtest">signUp!!!</button>
     </form>

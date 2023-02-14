@@ -15,21 +15,14 @@
     <p><%= 10 * 8 %></p>
 
     <br>
+    <h1>유저 정보</h1>
+    <div>userNum : <%= Profile.id %></div>
+    <div>userId : <%= Profile.userId %></div>
+    <div>userName : <%= Profile.name %></div>
+    <div>emailAddress : <%= Profile.emailAddress %></div>
 
-    <form action="/login/jwtLogin/logOut" id="logOutTest" method="get">
-        <button type="submit" form="logOutTest">logOut!!!</button>
-    </form>
-
-    <br>
-
-    <form action="/login/jwtLogin/profile" id="profiletest" method="get">
-        <button type="submit" form="profiletest">get_profile!!!</button>
-    </form>
-
-    <br>
-
-    <form action="/login/signUp/delete" id="deletetest" method="get">
-        <button type="submit" form="deletetest">회원 탈퇴!!!!</button>
+    <form action="/home" id="deletetest" method="get">
+        <button type="submit" form="deletetest">홈으로,,,</button>
     </form>
 </body>
     <!-- <script src="/js/jquery.js"></script>
