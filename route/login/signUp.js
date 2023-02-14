@@ -13,17 +13,17 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.use(cookieParser());
 
-//유저 리스트 보기
-router.get("/members", async (req, res) => {
-  const { id } = req.query;
-  if (id) {
-    const teamMembers = await User.findAll({ where: { id } });
-    res.send(teamMembers);
-  } else {
-    const members = await User.findAll();
-    res.send(members);
-  }
-});
+// //유저 리스트 보기
+// router.get("/members", async (req, res) => {
+//   const { id } = req.query;
+//   if (id) {
+//     const teamMembers = await User.findAll({ where: { id } });
+//     res.send(teamMembers);
+//   } else {
+//     const members = await User.findAll();
+//     res.send(members);
+//   }
+// });
 
 //회원가입
 router.post("/signUp", async (req, res) => {
@@ -34,12 +34,14 @@ router.post("/signUp", async (req, res) => {
   if(!currentMember){
     const user = User.build(newUser);
     await user.save();
-    console.log("회원가입 되었습니다.");
+    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
+    res.write(`<script>alert('회원가입 되었습니다.')</script>`);
+    res.write('<script>window.location="/"</script>');
   } else {
-    console.log("이미 있는 사용자입니다.");
+    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
+    res.write(`<script>alert('이미 있는 사용자 입니다.')</script>`);
+    res.write('<script>window.location="/"</script>');
   }
-
-  res.redirect("http://localhost:8000");
 });
 
 //회원탈퇴
@@ -49,10 +51,16 @@ router.get("/delete", authJwt, async (req, res) => {
   const id = req.num;
   const deletedCount = await User.destroy({ where: { id } });
 
+  res.clearCookie("jwt_user");
+
   if (deletedCount) {
-    res.send({ message: `${deletedCount} row(s) Deleted!!` });
+    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
+    res.write(`<script>alert('회원 탈퇴 되었습니다.')</script>`);
+    res.write('<script>window.location="/"</script>');
   } else {
-    res.status(404).send({ message: "there is no id" });
+    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
+    res.write(`<script>alert('존재하지 않는 사용자 입니다.')</script>`);
+    res.write('<script>window.location="/"</script>');
   }
 });
 
