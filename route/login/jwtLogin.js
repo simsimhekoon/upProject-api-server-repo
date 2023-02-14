@@ -23,16 +23,12 @@ router.post('/signIn', async (req, res) => {
 
     if (result.ok) {
       console.log("이미 로그인 되어 있습니다.");
-      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-      res.write(`<script>alert('이미 로그인 되어 있습니다.')</script>`);
-      res.write('<script>window.location="/home"</script>');
+      res.send("<script>alert('이미 로그인 되어 있습니다.');location.href='/home';</script>");
     } else {
       if (result.message == "jwt expired") {
         res.clearCookie("jwt_user");
         console.log("토큰 만료로 인해 로그아웃 되었습니다");
-        res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-        res.write(`<script>alert('토큰 만료로 인해 로그아웃 되었습니다.')</script>`);
-        res.write('<script>window.location="/"</script>');
+        res.send("<script>alert('토큰 만료로 인해 로그아웃 되었습니다.');location.href='/';</script>");
       } else {
         res.status(401).send({
           ok: false,
@@ -45,7 +41,6 @@ router.post('/signIn', async (req, res) => {
     const { userId, pw } = req.body;
     const [user] = await User.findAll({ where: { userId, pw } });
     if (user) {
-      console.log("로그인 되었습니다");
       const payload = {
         num: user.id,
         id: user.userId,
@@ -56,15 +51,12 @@ router.post('/signIn', async (req, res) => {
 
       // set cookie
       res.cookie("jwt_user", token, { httpOnly: true });
-      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-      res.write(`<script>alert('로그인성공!!!!!!')</script>`);
-      res.write('<script>window.location="/home"</script>');
+
+      console.log("로그인 되었습니다");
+      res.send("<script>alert('로그인 성공!!!');location.href='/home';</script>");
     } else {
-      // res.redirect('/user/login?msg=등록되지 않은 사용자 입니다');
       console.log("등록된 사용자가 아니거나 비밀번호가 틀렸습니다");
-      res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-      res.write(`<script>alert('등록된 사용자가 아니거나 비밀번호가 틀렸습니다')</script>`);
-      res.write('<script>window.location="/"</script>');
+      res.send("<script>alert('등록된 사용자가 아니거나 비밀번호가 틀렸습니다.');location.href='/';</script>");
     }
   }
 });
@@ -73,13 +65,9 @@ router.post('/signIn', async (req, res) => {
 router.get('/logOut', async (req, res) => {
   if (req.cookies.jwt_user) {
     res.clearCookie("jwt_user");
-    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-    res.write(`<script>alert('로그아웃 되었습니다.')</script>`);
-    res.write('<script>window.location="/"</script>');
+    res.send("<script>alert('로그아웃 되었습니다.');location.href='/';</script>");
   } else {
-    res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-    res.write(`<script>alert('로그인 되어있지 않습니다.')</script>`);
-    res.write('<script>window.location="/"</script>');
+    res.send("<script>alert('로그인 되어있지 않습니다.');location.href='/';</script>");
   }
 });
 
@@ -91,10 +79,6 @@ router.get('/profile', authJwt, async (req, res) => {
   console.log(editProfile);
 
   res.render('profile', { Profile: editProfile });
-  // res.send({
-  //   editProfile,
-  //   message: "profile access success!",
-  // });
 });
 
 

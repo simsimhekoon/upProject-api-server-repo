@@ -23,13 +23,9 @@ const authJWT = (req, res, next) => {
         //유효성 검사의 실패사유가 jwt만료일 경우 로그아웃
         res.clearCookie("jwt_user");
         console.log("토큰 만료로 인해 로그아웃 되었습니다");
-        res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-        res.write(`<script>alert('토큰 만료로 인해 로그아웃 되었습니다.')</script>`);
-        res.write('<script>window.location="/"</script>');
+        res.send("<script>alert('토큰 만료로 인해 로그아웃 되었습니다.');location.href='/';</script>");
       } else {
-        res.writeHead(200, { "Content-Type": "text/html;charset=UTF-8" }); //한글깨짐 방지
-        res.write(`<script>alert('${result.message}')</script>`);
-        res.write('<script>window.location="/"</script>');
+        res.send(`<script>alert(${result.message});location.href='/';</script>`);
       }
     }
   }
