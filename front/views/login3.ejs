@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>로그인</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/loginstyle.css" />
+  </head>
+  <body>
+    <form action="/login/jwtLogin/signIn" id="loginTest" method="post">
+      <h1><img src="./images/DDEEP_LOGO.png"></h1>
+      <label>아이디</label>
+      <input
+        name="userId" 
+        id="userId"
+        type="text"
+        placeholder="ID"
+      />
+      <label>비밀번호</label>
+      <input
+        name="pw" 
+        id="pw"
+        type="password"
+        placeholder="비밀번호"
+      />
+      <div>
+        <a href="#" class="question">비밀번호를 잊으셨나요?</a>
+      </div>
+      <button type="submit" form="loginTest">로그인</button>
+      <div class="question">
+        회원이 아니신가요?
+        <a href="#" id="join">가입하기</a>
+      </div>
+    </form>
+  </body>
+</html>

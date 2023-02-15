@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const secretKey = process.env.SECRET_KEY;
 const algorithm = process.env.JWT_ALG;
 const expiresIn = process.env.JWT_EXP;
+const expiresInR = process.env.JWT_EXP_R;
 
 const option = {algorithm, expiresIn};
 
@@ -37,12 +38,24 @@ function verify(token) {
 
 //refresh토큰 발급
 function createRefresh() {
-  return jwt.sign({}, secretKey, {expiresIn: '24h'});
+  return jwt.sign({}, secretKey, {expiresIn: expiresInR});
 }
 
 //refresh토큰 유혀성
-function refreshVerify() {
-
+function refreshVerify(token, userId) {
+  let decoded = null;
+  try {
+    decoded = decodeToken(token);
+    return {
+      ok: true,
+      id: userId,
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      message: err.message,
+    };
+  }
 }
 
 

@@ -36,13 +36,11 @@ router.get("/delete", authJwt, async (req, res) => {
   const id = req.num;
   const deletedCount = await User.destroy({ where: { id } });
 
-  const token = req.cookies.jwt_user; // header에서 access token을 가져옵니다.
-  const result = jwt.decodeToken(token);
-  const userId = result.id;
-
+  const userId = req.id;
   const deletedRefresh = await RefreshToken.destroy({ where: { userId } });
 
   res.clearCookie("jwt_user");
+  res.clearCookie("jwt_ref");
 
   if (deletedCount) {
     res.send("<script>alert('회원 탈퇴 되었습니다.');location.href='/';</script>");

@@ -28,6 +28,7 @@ router.post('/signIn', async (req, res) => {
     } else {
       if (result.message == "jwt expired") {
         res.clearCookie("jwt_user");
+        res.clearCookie("jwt_ref");
         console.log("토큰 만료로 인해 로그아웃 되었습니다");
         res.send("<script>alert('토큰 만료로 인해 로그아웃 되었습니다.');location.href='/';</script>");
       } else {
@@ -53,6 +54,7 @@ router.post('/signIn', async (req, res) => {
 
       // set cookie
       res.cookie("jwt_user", token, { httpOnly: true });
+      res.cookie("jwt_ref", refreshToken, { httpOnly: true });
 
       // refresh save
       const buildRefresh = {
@@ -75,12 +77,11 @@ router.post('/signIn', async (req, res) => {
 //로그아웃
 router.get('/logOut', async (req, res) => {
   if (req.cookies.jwt_user) {
-    const token = req.cookies.jwt_user; // header에서 access token을 가져옵니다.
-    const result = jwt.decodeToken(token);
-    const userId = result.id;
-
-    const deletedRefresh = await RefreshToken.destroy({ where: { userId } });
+    let token = req.cookies.jwt_user; // header에서 access token을 가져옵니다.
+    token = req.cookies.jwt_ref;
+    const deletedRefresh = await RefreshToken.destroy({ where: { token } });
     res.clearCookie("jwt_user");
+    res.clearCookie("jwt_ref");
 
     res.send(
       "<script>alert('로그아웃 되었습니다.');location.href='/';</script>"
@@ -95,7 +96,6 @@ router.get('/profile', authJwt, async (req, res) => {
   console.log("유효성 검사 성공");
   const id = req.num;
   const editProfile = await User.findOne({ where: { id } });
-  console.log(editProfile);
 
   res.render('profile', { Profile: editProfile });
 });
