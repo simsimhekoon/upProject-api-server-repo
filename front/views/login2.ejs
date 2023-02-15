@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,15 +14,27 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim nesciunt excepturi reprehenderit voluptatem a ducimus, totam placeat maxime et, magni facere commodi ullam. Est dolorem cumque, maxime at modi ratione!</p>
     <p><%= 10 * 8 %></p>
 
-    <br>
-    <h1>유저 정보</h1>
-    <div>userNum : <%= Profile.id %></div>
-    <div>userId : <%= Profile.userId %></div>
-    <div>userName : <%= Profile.name %></div>
-    <div>emailAddress : <%= Profile.emailAddress %></div>
+    <h2>로그인</h2>
+    <form action="/login/jwtLogin/signIn" id="loginTest" method="post">
+        ID <input type="text" name="userId" id="userId">
+        <br>
+        PW <input type="text" name="pw" id="pw">
+        <button type="submit" form="loginTest">signIn!!!</button>
+    </form>
 
-    <form action="/home" id="goToHome" method="get">
-        <button type="submit" form="goToHome">홈으로,,,</button>
+    <br>
+    <br>
+
+    <h2>회원가입</h2>
+    <form action="/login/signUp/signUp" id="createtest" method="post">
+        new id<input type="text" name="userId" id="userId">
+        <br>
+        pw<input type="text" name="pw" id="pw">
+        <br>
+        name<input type="text" name="name" id="name">
+        <br>
+        email<input type="text" name="emailAddress" id="emailAddress">
+        <button type="submit" form="createtest">signUp!!!</button>
     </form>
 </body>
     <!-- <script src="/js/jquery.js"></script>

@@ -17,6 +17,7 @@ router.use(cookieParser());
 
 //로그인 시도
 router.post('/signIn', async (req, res) => {
+  console.log("로그인을 시도합니다.");
   if (req.cookies.jwt_user) {
     //로그인을 시도했을때 토큰이 있다면 이미로그인되었다고 알리며, 토큰이 만료되었을땐 로그아웃시킨다.
     const token = req.cookies.jwt_user;
@@ -29,6 +30,8 @@ router.post('/signIn', async (req, res) => {
       if (result.message == "jwt expired") {
         res.clearCookie("jwt_user");
         res.clearCookie("jwt_ref");
+        const token = req.cookies.jwt_ref;
+        await RefreshToken.destroy({ where: { token } });
         console.log("토큰 만료로 인해 로그아웃 되었습니다");
         res.send("<script>alert('토큰 만료로 인해 로그아웃 되었습니다.');location.href='/';</script>");
       } else {

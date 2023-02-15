@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, "front/assets")));
 
 const jwtLoginRouter = require('./route/login/jwtLogin.js');
 const signUpRouter = require("./route/login/signUp.js");
+const listRouter = require("./route/list/list.js");
 
 app.get('/', (req, res) => { //로그인 화면
     res.render("login");
@@ -21,6 +22,7 @@ app.get("/home", (req, res) => { //홈 화면
 
 app.use("/login/jwtLogin", jwtLoginRouter);
 app.use("/login/signUp", signUpRouter);
+app.use("/list/list", listRouter);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('server is listening...');
