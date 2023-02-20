@@ -14,13 +14,16 @@ router.use(cookieParser());
 
 //게시판 글 목록
 router.get("/getPostList", authJwt, async (req, res) => {
-  console.log("일단 진입은 함");
   const postList = await Post.findAll({
     attributes: ["id", "userId", "name", "title", "content", "viewCount", "createdAt"],
   });
-  const createdDate = postList[0].createdAt.toISOString();
-  const date = createdDate.substr(0, 10);
-  res.render("post", { postList: postList, date: date });
+  if(!postList){ //게시글이 하나도 없는경우
+    res.render("post", { postList: "", date: "" });
+  } else {
+    const createdDate = postList[0].createdAt.toISOString();
+    const date = createdDate.substr(0, 10);
+    res.render("post", { postList: postList, date: date });
+  }
 });
 
 //글 쓰러가기
