@@ -19,8 +19,8 @@ const authJWT = async (req, res, next) => {
       console.log("유효성 검증됨");
       // token이 검증되었으면 req에 값을 세팅하고, 다음 콜백함수로 갑니다.
       req.num = result.num;
-      req.id = result.id;
-      req.userId = result.userId;
+      req.id = result.id;//userId
+      // req.userId = result.id;
       req.name = result.name;
       next();
     } else {

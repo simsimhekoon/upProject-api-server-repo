@@ -15,10 +15,12 @@ const sequelize = new Sequelize(database, username, password, {
 const Member = require('./member')(sequelize, Sequelize.DataTypes);
 const User = require('./user')(sequelize, Sequelize.DataTypes);
 const RefreshToken = require("./refreshtoken")(sequelize, Sequelize.DataTypes);
+const Post = require("./post")(sequelize, Sequelize.DataTypes);
 
 const db = {};
 db.Member = Member;
 db.User = User;
 db.RefreshToken = RefreshToken;
+db.Post = Post;
 
 module.exports = db;

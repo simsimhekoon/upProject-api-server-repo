@@ -1,0 +1,30 @@
+@import url(reset.css);
+
+.carousel-item {
+  background-color: gray;
+  height: 400px;
+}
+
+main {
+  margin: 0 auto;
+}
+
+.bestPost {
+  margin: 30px;
+}
+
+.bestPost h3 {
+  border: 1px solid #000000;
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.bestPostList {
+  margin-top: 10px;
+  line-height: 30px;
+}
+
+.postWirter {
+  text-decoration: underline;
+}

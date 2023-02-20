@@ -49,6 +49,18 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3000/post/post/write
+Content-Type: application/json
+
+{
+  "userId": "6",
+  "name": "6",
+  "title": "titleTest9",
+  "content": "content test9",
+  "viewCount": 0
+}
+
+###
 PUT https://simsimhaekoon-api-app.herokuapp.com/api/members/1
 Content-Type: application/json
 

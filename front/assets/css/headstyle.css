@@ -1,0 +1,42 @@
+@import url(reset.css);
+
+* {
+  box-sizing: border-box;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid #000000;
+  padding: 0 10px;
+}
+
+header a,
+nav a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 30px;
+}
+
+header a:hover,
+nav a:hover {
+  text-decoration: none;
+  color: #000000;
+}
+
+.header-title-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-nav a {
+  margin-left: 30px;
+}

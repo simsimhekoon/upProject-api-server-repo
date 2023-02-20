@@ -7,7 +7,6 @@ const cookieParser = require("cookie-parser");
 
 const db = require("../../models");
 const { User } = db;
-const { RefreshToken } = db;
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));

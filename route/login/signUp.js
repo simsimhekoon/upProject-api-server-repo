@@ -14,18 +14,65 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.use(cookieParser());
 
-//회원가입
-router.post("/signUp", async (req, res) => {
-  const newUser = req.body;
-  const userId = newUser.userId;
-  const [currentMember] = await User.findAll({ where: { userId } });
+//회원가입 하러가기
+router.get("/goToSignUp", (req, res) => {
+  res.render("signUp");
+});
 
-  if(!currentMember){
-    const user = User.build(newUser);
-    await user.save();
-    res.send("<script>alert('회원가입 되었습니다.');location.href='/';</script>");
+//회원가입 하기
+router.post("/signUp", async (req, res) => {
+  if (req.body.userId) {
+    if (req.body.pw) {
+      if (req.body.pwRepeat) {
+        if (req.body.name) {
+          if (req.body.emailAddress) {
+            if (req.body.pw == req.body.pwRepeat) {
+              //비밀번호 확인이 옳은지
+              const newUser = req.body;
+              const userId = newUser.userId;
+              const [currentMember] = await User.findAll({ where: { userId } });
+
+              if (!currentMember) {
+                //비밀번호가 옳다면 이미 있는 아이디는 아닌지
+                const user = User.build(newUser);
+                await user.save();
+                res.send(
+                  "<script>alert('회원가입 되었습니다.');location.href='/';</script>"
+                );
+              } else {
+                res.send(
+                  "<script>alert('이미 있는 사용자입니다.');location.href='/';</script>"
+                );
+              }
+            } else {
+              res.send(
+                "<script>alert('비밀번호가 서로 다릅니다.');location.href='/login/signUp/goToSignUp';</script>"
+              );
+            }
+          } else {
+            res.send(
+              "<script>alert('email이 입력되지 않았습니다.');location.href='/login/signUp/goToSignUp';</script>"
+            );
+          }
+        } else {
+          res.send(
+            "<script>alert('닉네임이 입력되지 않았습니다.');location.href='/login/signUp/goToSignUp';</script>"
+          );
+        }
+      } else {
+        res.send(
+          "<script>alert('확인용 비밀번호가 입력되지 않았습니다.');location.href='/login/signUp/goToSignUp';</script>"
+        );
+      }
+    } else {
+      res.send(
+        "<script>alert('비밀번호가 입력되지 않았습니다.');location.href='/login/signUp/goToSignUp';</script>"
+      );
+    }
   } else {
-    res.send("<script>alert('이미 있는 사용자입니다.');location.href='/';</script>");
+    res.send(
+      "<script>alert('아이디가 입력되지 않았습니다.');location.href='/login/signUp/goToSignUp';</script>"
+    );
   }
 });
 
