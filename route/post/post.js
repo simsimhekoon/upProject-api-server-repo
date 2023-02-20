@@ -14,6 +14,7 @@ router.use(cookieParser());
 
 //게시판 글 목록
 router.get("/getPostList", authJwt, async (req, res) => {
+  console.log("일단 진입은 함");
   const postList = await Post.findAll({
     attributes: ["id", "userId", "name", "title", "content", "viewCount", "createdAt"],
   });

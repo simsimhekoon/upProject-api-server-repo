@@ -12,6 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+   
     await queryInterface.bulkInsert("posts", [
       {
         id: 1,
