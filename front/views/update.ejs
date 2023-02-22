@@ -19,13 +19,14 @@
                     <div class="title">
                         <dl>
                             <dt>제목</dt>
-                            <dd> <input type="text" value=<%=post.title%> id="title" name="title"></dd>
+                            <%console.log(post.title);%>
+                            <dd> <input type="text" value='<%=post.title%>' id="title" name="title"></dd>
                         </dl>
                     </div>
                     <div class="info">
                         <dl>
                             <dt>글쓴이</dt>
-                            <dd><input type="text" placeholder=<%=post.name%>></dd>
+                            <dd><input type="text" placeholder=<%=post.name%> readonly></dd>
                         </dl>
                     </div>
                     <div class="cont">
@@ -33,7 +34,7 @@
                     </div>
                     <div class="bt_wrap">
                         <button type="submit" form="update" class="on">수정</button>
-                        <a href="/post/post/getPostList">취소</a> 
+                        <a href="/post/post/getPostList/1">취소</a> 
                         <div id="test" onclick="goToDelete('<%=post.id%>','<%=post.userId%>')"%>>삭제</div>
                     </div>
                 </div>

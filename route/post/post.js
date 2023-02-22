@@ -13,16 +13,17 @@ router.use(express.urlencoded({ extended: true }));
 router.use(cookieParser());
 
 //게시판 글 목록
-router.get("/getPostList", authJwt, async (req, res) => {
-  const postList = await Post.findAll({
+router.get("/getPostList/:page", authJwt, async (req, res) => {
+  const currentPage = parseInt(req.params.page);
+  const postList = await Post.findAll({ order: [['id', 'DESC'],], offset: (currentPage * 5)-5, limit: 5 }, {
     attributes: ["id", "userId", "name", "title", "content", "viewCount", "createdAt"],
   });
+  const allPage = await Post.findAll();
+
   if(postList.length == 0){ //게시글이 하나도 없는경우
     res.render("post", { postList: "", date: "" });
   } else {
-    const createdDate = postList[0].createdAt.toISOString();
-    const date = createdDate.substr(0, 10);
-    res.render("post", { postList: postList, date: date });
+    res.render("post", { postList: postList, allPage: allPage.length, currentPage:currentPage });
   }
 });
 
@@ -44,7 +45,7 @@ router.post("/write", authJwt, async (req, res) => {
   const post = Post.build(newPost);
   await post.save();
   res.send(
-    "<script>alert('작성되었습니다.');location.href='/post/post/getPostList';</script>"
+    "<script>alert('작성되었습니다.');location.href='/post/post/getPostList/1';</script>"
   );
 });
 
@@ -92,7 +93,7 @@ router.get("/goToUpdate", authJwt, async (req, res) => {
     res.render("update", { post: post });
   } else {
     res.send(
-      "<script>alert('작성자만 수정할 수 있습니다.');location.href='/post/post/getPostList';</script>"
+      "<script>alert('작성자만 수정할 수 있습니다.');location.href='/post/post/getPostList/1';</script>"
     );
   }
 });
@@ -108,7 +109,7 @@ router.post("/update", authJwt, async (req, res) => {
   await Post.update(updatePost, { where: { id } });
 
   res.send(
-    "<script>alert('수정되었습니다.');location.href='/post/post/getPostList';</script>"
+    "<script>alert('수정되었습니다.');location.href='/post/post/getPostList/1';</script>"
   );
 });
 
@@ -118,7 +119,7 @@ router.get("/delete", authJwt, async (req, res) => {
     const id = req.query.id;
     await Post.destroy({ where: { id } });
     res.send(
-      "<script>alert('삭제되었습니다.');location.href='/post/post/getPostList';</script>"
+      "<script>alert('삭제되었습니다.');location.href='/post/post/getPostList/1';</script>"
     );
   }
 });

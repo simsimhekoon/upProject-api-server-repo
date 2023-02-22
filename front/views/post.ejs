@@ -24,10 +24,16 @@
                 </div>
                 <%
                 let data;
-                let count = postList.length;
-                for(var i = postList.length-1; i>=0; i--)
+                let count = allPage - (currentPage * 5 - 5);
+
+                let createdDate;
+                let date;
+
+                for(var i = 0; i < postList.length; i++)
                 {
                     data = postList[i];
+                    createdDate = data.createdAt.toISOString();
+                    date = createdDate.substr(0, 10);
                 %>
                 <div>
                     <div class="num"><%=count%></div>
@@ -41,20 +47,25 @@
                 </div>
 
                 <div class="board_page">                 
-                    <a href="#" class="num" id="first">&lt;&lt;</a>
-                    <a href="#" class="num" id="prev">&lt;</a>
-                    <a href="#" class="num on">1</a>
+                    <a href="#" class="num" id="first" onclick="firstPage()">&lt;&lt;</a>
+                    <a href="#" class="num" id="prev" onclick="prevPage()">&lt;</a>
                     <%
-                    let split = postList.length/5;
+                    let split = allPage / 5;
+                    let start = Math.floor((currentPage-1) / 5) * 5 +1;
 
-                    for(var i = 2; i < split+1; i++)
+                    for(var i = start; i < split + 1; i++)
                     {
-                        if(i == 6) break;
+                        if(i == start+5) break;
+                        if(i == currentPage) {
                     %>                       
-                    <a href="#" class="num" id="page<%=i%>"><%=i%></a>
-                    <%}%>                         
-                    <a href="#" class="num" id="next">&gt;</a>
-                    <a href="#" class="num" id="end">&gt;&gt;</a>               
+                    <a href="#" class="num on" id="page<%=i%>" onclick="changePage()"><%=i%></a>
+                    <%} else {
+                    %>
+                    <a href="#" class="num" id="page<%=i%>" onclick="changePage()"><%=i%></a>                        
+                    <%}
+                    }%>
+                    <a href="#" class="num" id="next" onclick="nextPage('<%=split + 1%>')">&gt;</a>
+                    <a href="#" class="num" id="end" onclick="lastPage('<%=split + 1%>')">&gt;&gt;</a>               
                 </div>
 
                 <form action="/post/post/goToWrite" id="goToWrite" method="get">
@@ -66,4 +77,32 @@
     </div>
 </body>
 <!-- <script src="/js/post.js"></script> -->
+<script>
+    function changePage(){
+        let currentPage = parseInt(event.currentTarget.innerText);
+        location.href=`/post/post/getPostList/${currentPage}`;
+    }
+
+    function firstPage() {
+        location.href='/post/post/getPostList/1';
+    }
+
+    function prevPage() {
+        let currentPage = parseInt(document.querySelector('.on').innerText);
+        if(currentPage != 1){
+            location.href=`/post/post/getPostList/${currentPage-1}`;
+        } 
+    }
+
+    function nextPage(endPage) {
+        let currentPage = parseInt(document.querySelector('.on').innerText);
+        if(currentPage != Math.floor(endPage)){
+            location.href=`/post/post/getPostList/${currentPage+1}`;
+        }
+    }
+
+    function lastPage(endPage) {
+        location.href=`/post/post/getPostList/${Math.floor(endPage)}`;
+    }
+</script>
 </html>

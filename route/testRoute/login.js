@@ -27,7 +27,7 @@ router.use(session(sessionObj));
 router.get('/members', async (req, res) => {
   const { id } = req.query;
   if (id) {
-    const teamMembers = await User.findAll({ where: { id } }); 
+    const teamMembers = await User.findAll({ where: { id } });
     res.send(teamMembers);
   } else {
     const members = await User.findAll(); 
