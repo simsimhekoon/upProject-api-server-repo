@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 
 const db = require("../../models");
 const { Post } = db;
+const { Comment } = db;
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -15,9 +16,22 @@ router.use(cookieParser());
 //게시판 글 목록
 router.get("/getPostList/:page", authJwt, async (req, res) => {
   const currentPage = parseInt(req.params.page);
-  const postList = await Post.findAll({ order: [['id', 'DESC'],], offset: (currentPage * 5)-5, limit: 5 }, {
-    attributes: ["id", "userId", "name", "title", "content", "viewCount", "createdAt"],
-  });
+  const postList = await Post.findAll(
+    {
+      attributes: [
+        "id",
+        "userId",
+        "name",
+        "title",
+        "content",
+        "viewCount",
+        "createdAt",
+      ],
+      order: [["id", "DESC"]],
+      offset: currentPage * 5 - 5,
+      limit: 5,
+    },
+  );
   const allPage = await Post.findAll();
 
   if(postList.length == 0){ //게시글이 하나도 없는경우
@@ -50,12 +64,14 @@ router.post("/write", authJwt, async (req, res) => {
 });
 
 //글 보기
-router.get("/view", authJwt, async (req, res) => {
+router.get("/view/:commentPage", authJwt, async (req, res) => {
   const id = req.query.id;
   const num = req.query.num;
-
+  
+  //조회수
   await Post.increment({viewCount: 1}, {where:{ id }});
 
+  //본문처리
   const post = await Post.findOne({
     attributes: [
       "id",
@@ -71,7 +87,13 @@ router.get("/view", authJwt, async (req, res) => {
   const createdDate = post.createdAt.toISOString();
   const date = createdDate.substr(0, 10);
 
-  res.render("view", { post: post, date: date, num: num });
+  //댓글처리
+  const postId = id;
+  const currentPage = req.params.commentPage;
+  const comment = await Comment.findAll({ attributes: ["name", "content"], where: { postId }, order: [["id", "DESC"]], offset: currentPage * 10 - 10, limit: 10 });
+
+  const allPage = await Comment.findAll({ where: { postId } });
+  res.render("view", { post: post, date: date, num: num, comment: comment, allPage: allPage.length, currentPage: currentPage });
 });
 
 //글 수정하러 가기

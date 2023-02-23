@@ -48,24 +48,43 @@
             <!-- 여기서 부터 댓글 란입니다.-->
             <h3> comments</h3>
             <div class="comment_wrap">
-
-                <div class="text-form-wrap">
-                <textarea class="text-form" rows="5" placeholder=" 댓글을 작성해주세요"></textarea>
-                <a href="#" class="text_bt"> 등록</a>
-                </div>
-
-                <div class="first-comment"></div>
-                <div class="user1"> 김이름</div>
-                <div class="comment_cont"> 이거 댓글 직접 만드는건데 잘나올 수 있을 까 이런식으로 하는 거 맞을 까요 여러분 ㅜㅜㅜㅜ</div>
-                <div class="first-comment"></div>
-                <div class="user1"> 김이름</div>
-                <div class="comment_cont"> 이거 댓글 직접 만드는건데 잘나올 수 있을 까 이런 식으로 하는 거 맞을 까요 여러분 ㅜㅜㅡㅜㅜㅜ</div>
-                <div class="first-comment"></div>
-                <div class="user1"> 김이름</div>
-                <div class="comment_cont"> 이거 댓글 직접 만드는건데 잘나올 수 있을 까 이런 식으로 하는 거 맞을 까요 여러분 ㅜㅜㅡㅜㅜㅜ</div>
+                <form action="/post/comment/write?postId=<%=data.id%>&num=<%=num%>" id="write" method="post">
+                    <div class="text-form-wrap">
+                        <textarea class="text-form" rows="5" placeholder="댓글을 작성해주세요" id="comment" name="comment"></textarea>
+                        <button type="submit" form="write" class="text_bt">등록</button>
+                    </div>
+                </form>
+                <%
+                for(let i = 0; i < comment.length; i++) {
+                %>
+                    <div class="first-comment"></div>
+                    <div class="user1"><%=comment[i].name%></div>
+                    <div class="comment_cont"><%=comment[i].content%></div>
+                <%}%>
             </div>
             <!--댓글란 끝!-->
 
+            <div class="board_page">                 
+                <a href="#" class="num" id="first" onclick="firstPage('<%=data.id%>', '<%=num%>')">&lt;&lt;</a>
+                <a href="#" class="num" id="prev" onclick="prevPage('<%=data.id%>', '<%=num%>')">&lt;</a>
+                <%
+                let split = allPage / 10;
+                let start = Math.floor((currentPage-1) / 10) * 10 +1;
+
+                for(var i = start; i < split + 1; i++)
+                {
+                    if(i == start+10) break;
+                    if(i == currentPage) {
+                %>                       
+                <a href="#" class="num on" id="page<%=i%>" onclick="changePage('<%=data.id%>', '<%=num%>')"><%=i%></a>
+                <%} else {
+                %>
+                <a href="#" class="num" id="page<%=i%>" onclick="changePage('<%=data.id%>', '<%=num%>')"><%=i%></a>                        
+                <%}
+                }%>
+                <a href="#" class="num" id="next" onclick="nextPage('<%=split + 1%>', '<%=data.id%>', '<%=num%>')">&gt;</a>
+                <a href="#" class="num" id="end" onclick="lastPage('<%=split + 1%>', '<%=data.id%>', '<%=num%>')">&gt;&gt;</a>               
+            </div>
 
             <div class="bt_wrap">
                 <a href="/post/post/getPostList/1" class="on">목록</a>
@@ -74,4 +93,5 @@
         </div>
     </div>
 </body>
+<script src="/js/comment.js"></script>
 </html>

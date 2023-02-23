@@ -12,6 +12,7 @@ const jwtLoginRouter = require('./route/login/jwtLogin.js');
 const signUpRouter = require("./route/login/signUp.js");
 const listRouter = require("./route/list/list.js");
 const postRouter = require("./route/post/post.js");
+const commentRouter = require("./route/post/comment.js");
 
 app.get('/', (req, res) => { //로그인 화면
     res.render("login");
@@ -29,6 +30,7 @@ app.use("/login/jwtLogin", jwtLoginRouter);
 app.use("/login/signUp", signUpRouter);
 app.use("/list/list", listRouter);
 app.use("/post/post", postRouter);
+app.use("/post/comment", commentRouter);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('server is listening...');

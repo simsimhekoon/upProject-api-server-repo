@@ -251,6 +251,7 @@ a{
     border-bottom: 1px solid #000;
     line-height: 160%;
     font-size: 1.4rem;
+    height: 300px;
 }
 
 /*글쓰기 페이지 */
@@ -378,12 +379,12 @@ h3{
 }
 
 .user1 { 
-    font-size: 23px;
+    font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 5px;
    
 }
 
 .comment_cont{
-    font-size: 15px;
+    font-size: 1.4rem;
 }

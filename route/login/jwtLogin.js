@@ -58,7 +58,6 @@ router.post('/signIn', async (req, res) => {
       // set cookie
       res.cookie("jwt_user", token, { httpOnly: true });
       res.cookie("jwt_ref", refreshToken, { httpOnly: true });
-      console.log(res);
 
       // refresh save
       const buildRefresh = {

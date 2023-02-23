@@ -38,7 +38,7 @@
                 <div>
                     <div class="num"><%=count%></div>
                     <%count--;%>
-                    <div class="title"><a href="/post/post/view?id=<%=data.id%>&num=<%=count+1%>"><%=data.title%></a></div>
+                    <div class="title"><a href="/post/post/view/1?id=<%=data.id%>&num=<%=count+1%>"><%=data.title%></a></div>
                     <div class="writer"><%=data.name%></div>
                     <div class="date"><%=date%></div>
                     <div class="count"><%=data.viewCount%></div>
@@ -76,33 +76,5 @@
         </div>
     </div>
 </body>
-<!-- <script src="/js/post.js"></script> -->
-<script>
-    function changePage(){
-        let currentPage = parseInt(event.currentTarget.innerText);
-        location.href=`/post/post/getPostList/${currentPage}`;
-    }
-
-    function firstPage() {
-        location.href='/post/post/getPostList/1';
-    }
-
-    function prevPage() {
-        let currentPage = parseInt(document.querySelector('.on').innerText);
-        if(currentPage != 1){
-            location.href=`/post/post/getPostList/${currentPage-1}`;
-        } 
-    }
-
-    function nextPage(endPage) {
-        let currentPage = parseInt(document.querySelector('.on').innerText);
-        if(currentPage != Math.floor(endPage)){
-            location.href=`/post/post/getPostList/${currentPage+1}`;
-        }
-    }
-
-    function lastPage(endPage) {
-        location.href=`/post/post/getPostList/${Math.floor(endPage)}`;
-    }
-</script>
+<script src="/js/post.js"></script>
 </html>

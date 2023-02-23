@@ -1,12 +1,12 @@
-const { Model } = require('sequelize');
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class post extends Model {
+  class Comment extends Model {
     static associate(models) {
-      this.hasMany(models.Comment, { onDelete: "cascade" });
+      this.belongsTo(models.post, { onDelete: 'cascade' });
     }
   }
-  post.init(
+  Comment.init(
     {
       id: {
         allowNull: false,
@@ -16,14 +16,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: DataTypes.STRING,
       name: DataTypes.STRING,
-      title: DataTypes.STRING,
       content: DataTypes.STRING,
-      viewCount: DataTypes.INTEGER,
+      postId: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "post",
+      modelName: "Comment",
     }
   );
-  return post;
+  return Comment;
 };

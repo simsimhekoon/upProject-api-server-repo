@@ -16,11 +16,13 @@ const Member = require('./member')(sequelize, Sequelize.DataTypes);
 const User = require('./user')(sequelize, Sequelize.DataTypes);
 const RefreshToken = require("./refreshtoken")(sequelize, Sequelize.DataTypes);
 const Post = require("./post")(sequelize, Sequelize.DataTypes);
+const Comment = require("./comment")(sequelize, Sequelize.DataTypes);
 
 const db = {};
 db.Member = Member;
 db.User = User;
 db.RefreshToken = RefreshToken;
 db.Post = Post;
+db.Comment = Comment;
 
 module.exports = db;
