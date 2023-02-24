@@ -57,9 +57,11 @@
                 <%
                 for(let i = 0; i < comment.length; i++) {
                 %>
-                    <div class="first-comment"></div>
-                    <div class="user1"><%=comment[i].name%></div>
-                    <div class="comment_cont"><%=comment[i].content%></div>
+                    <div>
+                        <div class="first-comment"></div>
+                        <div class="user1"><%=comment[i].name%></div>
+                        <div class="comment_cont"><%=comment[i].content%></div>
+                    </div>
                 <%}%>
             </div>
             <!--댓글란 끝!-->

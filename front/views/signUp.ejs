@@ -11,22 +11,28 @@
 </head>
 
 <body>
-  <form action="/login/signUp/signUp" id="loginTest" method="post">
+  <form name="join" method="post" action="/login/signUp/signUp">
     <div class="form">
       <h1 class="title">회원가입</h1>
       <label for="username">아이디</label>
-      <input name="userId" id="userId">
+      <input name="userId" id="username">
       <label for="password">비밀번호</label>
-      <input id="pw" name="pw" type="password">
+      <input id="password" name="pw" type="password">
       <label for="password-repeat">비밀번호 확인</label>
-      <input id="pwRepeat" name="pwRepeat" type="password">
+      <input id="password-repeat" name="pwRepeat" type="password">
+      <span id="errorText">비밀번호와 일치하지 않습니다.</span>
+      <span id="trueText">비밀번호와 일치합니다.</span>
+      <!-- <div class="test"></div> -->
       <label for="nickname">닉네임</label>
-      <input id="name" name="name">
+      <input id="nickname" name="name">
       <label for="email">이메일</label>
-      <input id="emailAddress" name="emailAddress" type="email">
-      <button>가입하기</button>
+      <input id="email" name="emailAddress" type="email">
+      <span class="text" id="errorEmail">이메일 형식이 잘못되었습니다.</span>
+      <button class="btn" type="button">가입하기</button>
     </div>
   </form>
+  <script src="/js/joinmember.js">
+  </script>
 </body>
 
 </html>
