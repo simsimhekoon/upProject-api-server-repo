@@ -61,7 +61,7 @@ const { uploadFile, handleUploadError } = require("./middleware.js");
 
 aws.config.update({
   accessKeyId: 'AKIAWRUUXKZIJHXY5PES',
-  secretAccessKey: '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',
+  secretAccessKey: "",
   region: 'ap-northeast-2'
 });
 
