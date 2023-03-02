@@ -6,6 +6,7 @@ const { Member } = db;
 
 router.use(express.json());
 
+
 // //읽기
 // router.get('/members', async (req, res) => {
 //   const { team } = req.query;
