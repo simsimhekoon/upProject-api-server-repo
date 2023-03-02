@@ -8,14 +8,12 @@ app.set("views", "./front/views");
 
 app.use(express.static(path.join(__dirname, "front/assets")));
 
-//test용 라우트입니다. 나중에 삭제!
-const TEST = require("./route/testRoute/test.js");
-
 const jwtLoginRouter = require('./route/login/jwtLogin.js');
 const signUpRouter = require("./route/login/signUp.js");
 const listRouter = require("./route/list/list.js");
 const postRouter = require("./route/post/post.js");
 const commentRouter = require("./route/post/comment.js");
+const handleImageRouter = require("./route/post/handleImage.js");
 
 app.get('/', (req, res) => { //로그인 화면
     res.render("login");
@@ -29,13 +27,12 @@ app.get("/post", (req, res) => { //글 리스트
   res.render("post");
 });
 
-app.use("/testRoute/test", TEST);
-
 app.use("/login/jwtLogin", jwtLoginRouter);
 app.use("/login/signUp", signUpRouter);
 app.use("/list/list", listRouter);
 app.use("/post/post", postRouter);
 app.use("/post/comment", commentRouter);
+app.use("/post/image", handleImageRouter);
 
 app.get("/imgTest", (req, res) => {
   res.render("imgtest");

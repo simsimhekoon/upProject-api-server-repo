@@ -1,16 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const aws = require('aws-sdk');
-const multer = require("multer");
-const multerS3 = require('multer-s3');
-
 const db = require("../../models");
 const { Member } = db;
 
 router.use(express.json());
-
-const { uploadFile, handleUploadError } = require("./middleware.js");
 
 // //읽기
 // router.get('/members', async (req, res) => {
@@ -59,34 +53,5 @@ const { uploadFile, handleUploadError } = require("./middleware.js");
 
 // });
 
-aws.config.update({
-  accessKeyId: 'AKIAWRUUXKZIJHXY5PES',
-  secretAccessKey: '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',
-  region: 'ap-northeast-2'
-});
-
-const s3 = new aws.S3();
-
-const upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: 'simsimbucket',
-        acl: 'public-read',
-        key: function(req, file, cb) {
-            cb(null, Date.now() + '-' + file.originalname);
-        }
-    })
-})
-
-router.post('/imgTest', upload.single('image'), (req, res) => {
-    res.send('Image uploaded to S3');
-})
-
-
-
-//이미지 테스트
-// router.post('/imgTest', uploadFile, handleUploadError, (req, res) => {
-//     res.status(200).send('File uploaded successfully');
-// });
 
 module.exports = router;
