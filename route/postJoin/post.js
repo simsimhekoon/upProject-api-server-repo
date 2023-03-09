@@ -20,7 +20,6 @@ router.use(cookieParser());
 
 //게시판 글 목록
 router.get("/getPostList/:page", authJwt, async (req, res) => {
-  console.log("start");
   const currentPage = parseInt(req.params.page);
   const postList = await PostJoin.findAll(
     {
@@ -300,7 +299,7 @@ router.get("/delete", authJwt, async (req, res) => {
 
 //참여하기
 router.get("/join", authJwt, async (req, res) => {
-  const userId = req.id;
+  const userId = req.num;
   const postId = req.query.id
   const check = await JoinMember.findOne({
     where: { postId, userId },
@@ -313,10 +312,9 @@ router.get("/join", authJwt, async (req, res) => {
   } else {
     const newJoin = {
       postId: req.query.id,
-      userId: req.id,
+      userId: req.num,
       name: req.name,
     };
-    console.log(newJoin);
     const join = JoinMember.build(newJoin);
     await join.save();
     res.send(
@@ -327,7 +325,7 @@ router.get("/join", authJwt, async (req, res) => {
 
 //참여 취소
 router.get("/cancel", authJwt, async (req, res) => {
-  const userId = req.id;
+  const userId = req.num;
   const check = await JoinMember.findOne({
     where: { userId },
   });
@@ -337,7 +335,7 @@ router.get("/cancel", authJwt, async (req, res) => {
       `<script>alert('신청 내역이 없습니다.');location.href='/post/postJoin/view?id=${req.query.id}&num=${req.query.num}';</script>`
     );
   } else {
-    const userId = req.id;
+    const userId = req.num;
     await JoinMember.destroy({ where: { userId } });
     res.send(
       `<script>alert('취소했습니다.');location.href='/post/postJoin/view?id=${req.query.id}&num=${req.query.num}';</script>`
