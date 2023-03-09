@@ -106,3 +106,7 @@ Content-Type: application/json
 
 ###jwt로그아웃
 GET http://localhost:3000/jwtLogin/logOut
+
+
+###
+GET http://localhost:3000/post/postJoin/test

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유게시판</title>
+    <link rel="stylesheet" href="/css/css.css">
+</head>
+<body>
+    <div class="board_wrap">
+        <div class="board_title"> 
+            <strong> 자유게시판 </strong>
+            <P> 더큰내일센터 7기 인재들의 자유게시판입니다.</P>
+        </div>
+        <form action="/post/postJoin/write" id="write" method="post" enctype="multipart/form-data">
+            <div class="board_write_wrap">
+                <div class="board_write">
+                    <div class="title">
+                        <dl>
+                            <dt>제목</dt>
+                            <dd> <input type="text" placeholder="제목 입력" id="title" name="title"></dd>
+                        </dl>
+                        <dl>
+                            <dt>소제목</dt>
+                            <dd> <input type="text" placeholder="소제목 입력" id="subtitle" name="subtitle"></dd>
+                        </dl>                        
+                    </div>
+                    <div class="info">
+                        <dl>
+                            <dt>글쓴이</dt>
+                            <dd><input type="text" placeholder=<%=name%> readonly></dd>
+                        </dl>
+                        <dl>
+                            <dt>장소</dt>
+                            <dd><input type="text" placeholder="장소 입력" name="place"></dd>
+                        </dl>
+                    </div>
+                    <div class="cont">
+                        <textarea placeholder="내용 입력" id="content" name="content"></textarea>
+                        <textarea placeholder="추가 안내 입력" id="ps" name="ps"></textarea>
+                        <div id = img></div>
+                        <dl>
+                            <dt>일자</dt>
+                            <dd><input type="date" name="date"></dd>
+                        </dl>
+                        <dl>
+                            <dt>신청기간</dt>
+                            <dd><input type="date" name="period"></dd>
+                        </dl>
+                        <dl>
+                            <dt>인원수</dt>
+                            <dd><input type="text" name="limit"></dd>
+                        </dl>
+                        <dl>
+                            <dt>결과 발표</dt>
+                            <dd><input type="date" name="confirm"%>></dd>
+                        </dl>
+                        <dl>
+                            <dt>이미지 업로드</dt>
+                            <dd><input type="file" name="image" id="image" accept="image/*" onchange="loadFile(this)"></dd>
+                        </dl>                        
+                    </div>
+                    <div class="bt_wrap">
+                        <button type="submit" form="write" class="on">등록</button>
+                        <a href="/post/postJoin/getPostList/1">취소</a> 
+                    </div>
+                </div>
+            </div>
+        </form>
+    <div>
+</body>
+
+<script>
+    function loadFile(input) {
+        let file = input.files[0];	//선택된 파일 가져오기
+
+        //새로운 이미지 div 추가
+        let newImage = document.createElement("img");
+        newImage.setAttribute("class", 'img');
+
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file);   
+
+        newImage.style.width = "70%";
+        newImage.style.height = "70%";
+        newImage.style.objectFit = "contain";
+
+        //이미지를 image-show div에 추가
+        var container = document.getElementById('img');
+        container.appendChild(newImage);
+    };
+</script>
+
+</html>

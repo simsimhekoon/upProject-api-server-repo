@@ -1,7 +1,19 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {}
+  class User extends Model {
+    static associate(models) {
+      this.hasMany(models.joinMember, { onDelete: "cascade" });
+    }
+
+    // static initHooks(models) {
+    //   this.addHook("beforeDestroy", async (postJoin, options) => {
+    //     await models.joinMember.destroy({
+    //       where: { userId: User.id },
+    //     });
+    //   });
+    // }
+  }
   User.init(
     {
       id: {

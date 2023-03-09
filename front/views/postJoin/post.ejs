@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유게시판</title>
+    <link rel="stylesheet" href="/css/css.css"
+</head>
+<body>
+    <div class="board_wrap">
+        <div class="board_title"> 
+            <strong> 자유게시판 </strong>
+            <P> 더큰내일센터 7기 인재들의 자유게시판입니다.</P>
+        </div>
+        <div class="board_list_wrap">
+            <div class="board_list">
+                <div class="top">
+                    <div class="num">번호</div>
+                    <div class="title">제목</div>
+                    <div class="writer">글쓴이</div>
+                    <div class="date">작성일</div>
+                    <div class="count">모집현황</div>
+                </div>
+                <%
+                let data;
+                let count = allPage - (currentPage * 5 - 5);
+
+                let createdDate;
+                let date;
+
+                for(var i = 0; i < postList.length; i++)
+                {
+                    data = postList[i];
+                    createdDate = data.createdAt.toISOString();
+                    date = createdDate.substr(0, 10);
+                %>
+                <div>
+                    <div class="num"><%=count%></div>
+                    <%count--;%>
+                    <div class="title"><a href="/post/postJoin/view?id=<%=data.id%>&num=<%=count+1%>"><%=data.title%></a></div>
+                    <div class="writer"><%=data.name%></div>
+                    <div class="date"><%=date%></div>
+                    <div class="count"><%=joinCount[i].count%>/<%=data.limit%></div>
+                </div>
+                <%}%>
+                </div>
+
+                <div class="board_page">                 
+                    <a href="#" class="num" id="first" onclick="firstPage()">&lt;&lt;</a>
+                    <a href="#" class="num" id="prev" onclick="prevPage()">&lt;</a>
+                    <%
+                    let split = allPage / 5;
+                    let start = Math.floor((currentPage-1) / 5) * 5 +1;
+
+                    for(var i = start; i < split + 1; i++)
+                    {
+                        if(i == start+5) break;
+                        if(i == currentPage) {
+                    %>                       
+                    <a href="#" class="num on" id="page<%=i%>" onclick="changePage()"><%=i%></a>
+                    <%} else {
+                    %>
+                    <a href="#" class="num" id="page<%=i%>" onclick="changePage()"><%=i%></a>                        
+                    <%}
+                    }%>
+                    <a href="#" class="num" id="next" onclick="nextPage('<%=split + 1%>')">&gt;</a>
+                    <a href="#" class="num" id="end" onclick="lastPage('<%=split + 1%>')">&gt;&gt;</a>               
+                </div>
+
+                <form action="/post/postJoin/goToWrite" id="goToWrite" method="get">
+                    <div class="bt_wrap">
+                        <button type="submit" form="goToWrite" class="on">글쓰기</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</body>
+<script src="/js/postJoin.js"></script>
+</html>

@@ -79,9 +79,21 @@ router.get("/view/:commentPage", authJwt, async (req, res) => {
   const allPage = await Comment.findAll({where: {postId}});
 
   if(comment.length == 0){ //게시글이 하나도 없는경우
-    res.render("view", { post: post, date: date, num: num, comment: "" });
+    res.render("./post/view", {
+      post: post,
+      date: date,
+      num: num,
+      comment: "",
+    });
   } else {
-    res.render("view", { post: post, date: date, num: num, comment: comment, allPage: allPage.length, currentPage:currentPage });
+    res.render("./post/view", {
+      post: post,
+      date: date,
+      num: num,
+      comment: comment,
+      allPage: allPage.length,
+      currentPage: currentPage,
+    });
   }
 
 //   res.render("view", { post: post, date: date, num: num, comment: comment });

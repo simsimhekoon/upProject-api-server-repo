@@ -1,0 +1,314 @@
+@import url(reset.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 헤더 부분 */
+header {
+  margin: 0;
+}
+
+.containers {
+  margin: 0 auto;
+  width: 1050px;
+}
+
+.logo-img {
+  width: 350px;
+}
+
+/* 상단 회원정보 바 */
+.top-border {
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  left: 0;
+  top: 0;
+  height: 27px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  z-index: 1;
+}
+
+.top-border .top-border-info {
+  margin: 0 auto;
+  width: 1050px;
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #000000;
+}
+
+/* 헤더 메뉴 내비게이션 */
+
+#top-menu ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#top-menu ul li {
+  font-size: 30px;
+  float: left;
+  width: 49%;
+  padding: 5px;
+  background-color: #808080;
+  border-radius: 1px;
+}
+
+#top-menu .menu-links {
+  display: block;
+  text-align: center;
+}
+
+#top-menu .menu-links:hover {
+  text-decoration: none;
+}
+
+.join::before {
+  content: "\e595";
+  font: var(--fa-font-solid);
+  margin-right: 5px;
+}
+
+.free::before {
+  content: "\f21b";
+  font: var(--fa-font-solid);
+  margin-right: 5px;
+}
+
+/* 반응형 사이드바 */
+.menubars {
+  position: fixed;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background-color: gray;
+  transition: 0.5s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.menubars.active {
+  width: 300px;
+}
+
+.menubars ul {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 25%;
+  margin-top: 10%;
+}
+
+.menubars ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+}
+
+.menubars ul li a {
+  position: relative;
+  text-decoration: none;
+  display: block;
+  display: flex;
+  color: #FFF;
+}
+
+.menubars ul li a .icon {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.menubars ul li a .icon .fa-solid {
+  font-size: 3em;
+}
+
+.menubars ul li a .title {
+  position: relative;
+  display: block;
+  text-align: start;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  white-space: nowrap;
+  font-size: 2em;
+}
+
+.menuicon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background-color: gray;
+  transition: 0.5s;
+}
+
+.menuicon.active {
+  right: 300px;
+}
+
+.menuicon::before {
+  content: "\f0c9";
+  font-family: fontAwesome;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+  text-align: center;
+  font-size: 3em;
+  color: #fff;
+}
+
+.menuicon.active::before {
+  content: "\f00d";
+}
+
+
+
+/* 본문 */
+
+.content {
+  margin: 0 auto;
+  max-width: 1050px;
+}
+
+section {
+  margin-bottom: 10px;
+}
+
+/* 광고배너 */
+
+.ad-banner {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 50px;
+  padding: 10px;
+  border: 1px solid #000000;
+}
+
+/* 본문 캐러셀 */
+
+.carousel-item {
+  background-color: gray;
+  height: 500px;
+}
+
+/* 테블릿 가로, 테블릿 세로 (해상도 651px ~ 1024px)*/
+@media all and (min-width:651px) and (max-width:1024px) {
+
+  .containers {
+    max-width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .top-border {
+    display: none;
+  }
+
+  /* 반응형 사이드바 */
+
+  #top-menu {
+    display: none;
+  }
+
+  .menubars {
+    font-size: 16px;
+  }
+
+  .menubars ul {
+    left: 10%;
+  }
+
+  .menubars.active {
+    width: 30%;
+  }
+
+  .menuicon.active {
+    right: 30%;
+  }
+}
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 650px)*/
+@media all and (max-width:650px) {
+  .containers {
+    max-width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .top-border {
+    display: none;
+  }
+
+  /* 반응형 사이드바 */
+
+  #top-menu {
+    display: none;
+  }
+
+  .menubars {
+    font-size: 8px;
+  }
+
+  .menuicon {
+    width: 2em;
+    height: 2em;
+  }
+
+  .menuicon::before {
+    font-size: 2em;
+    line-height: 1em;
+  }
+
+  .menubars ul {
+    left: 0;
+  }
+
+  .menubars.active {
+    width: 30%;
+  }
+
+  .menuicon.active {
+    right: 30%;
+  }
+}
+
+
+@media all and (min-width:1025px) {
+  .menubars {
+    display: none;
+  }
+
+  .menuicon {
+    display: none;
+  }
+}

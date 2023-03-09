@@ -35,20 +35,21 @@ router.get("/getPostList/:page", authJwt, async (req, res) => {
   const allPage = await Post.findAll();
 
   if(postList.length == 0){ //게시글이 하나도 없는경우
-    res.render("post", { postList: "", date: "" });
+    res.render("./post/post", { postList: "", date: "" });
   } else {
-    res.render("post", { postList: postList, allPage: allPage.length, currentPage:currentPage });
+    res.render("./post/post", { postList: postList, allPage: allPage.length, currentPage:currentPage });
   }
 });
 
 //글 쓰러가기
 router.get("/goToWrite", authJwt, async (req, res) => {
   const name = req.name;
-  res.render("write", {name: name});
+  res.render("./post/write", {name: name});
 });
 
 //글쓰기
 router.post("/write", authJwt, async (req, res) => {
+  console.log(req.body);
   const newPost = {
     "userId": req.id,
     "name": req.name,
@@ -93,7 +94,14 @@ router.get("/view/:commentPage", authJwt, async (req, res) => {
   const comment = await Comment.findAll({ attributes: ["name", "content"], where: { postId }, order: [["id", "DESC"]], offset: currentPage * 10 - 10, limit: 10 });
 
   const allPage = await Comment.findAll({ where: { postId } });
-  res.render("view", { post: post, date: date, num: num, comment: comment, allPage: allPage.length, currentPage: currentPage });
+  res.render("./post/view", {
+    post: post,
+    date: date,
+    num: num,
+    comment: comment,
+    allPage: allPage.length,
+    currentPage: currentPage,
+  });
 });
 
 //글 수정하러 가기
@@ -112,7 +120,7 @@ router.get("/goToUpdate", authJwt, async (req, res) => {
     where: { id },
   });
   if(req.id == post.userId){
-    res.render("update", { post: post });
+    res.render("./post/update", { post: post });
   } else {
     res.send(
       "<script>alert('작성자만 수정할 수 있습니다.');location.href='/post/post/getPostList/1';</script>"
