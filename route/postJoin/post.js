@@ -20,6 +20,7 @@ router.use(cookieParser());
 
 //게시판 글 목록
 router.get("/getPostList/:page", authJwt, async (req, res) => {
+  console.log("start");
   const currentPage = parseInt(req.params.page);
   const postList = await PostJoin.findAll(
     {
@@ -29,6 +30,7 @@ router.get("/getPostList/:page", authJwt, async (req, res) => {
     },
   );
   const allPage = await PostJoin.findAll();
+  console.log("1");
 
   //모집현황 생성
   let joinCount = [];
@@ -39,11 +41,13 @@ router.get("/getPostList/:page", authJwt, async (req, res) => {
       joinCount[i] = await JoinMember.findAndCountAll({ where: { postId } });
     }
   }
-
+  console.log("2");
 
   if(postList.length == 0){ //게시글이 하나도 없는경우
+    console.log("3");
     res.render("./postJoin/post", { postList: "", date: "", allPage: 0, currentPage: 1 });
   } else {
+    console.log("4");
     res.render("./postJoin/post", {
       postList: postList,
       allPage: allPage.length,
