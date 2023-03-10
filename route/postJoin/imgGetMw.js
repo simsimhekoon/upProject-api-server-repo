@@ -7,6 +7,7 @@ const { PostImg } = db;
 const s3 = new AWS.S3({
   accessKeyId: process.env.S3_KEY,
   secretAccessKey: process.env.S3_SECRET,
+  signatureVersion: "v4",
 });
 
 const getImageUrl = (bucketName, key) => {
