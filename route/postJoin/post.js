@@ -102,13 +102,13 @@ router.get("/view", authJwt, async (req, res) => {
 
   //날짜 처리
   let createdDate = post.createdAt.toISOString();
-  const date = createdDate.substr(0, 10);
+  const date = createdDate.substr(0, 19);
   createdDate = post.date.toISOString();
-  const dateValue = createdDate.substr(0, 10);
+  const dateValue = createdDate.substr(0, 19);
   createdDate = post.period.toISOString();
-  const period = createdDate.substr(0, 10);
+  const period = createdDate.substr(0, 19);
   createdDate = post.confirm.toISOString();
-  const confirm = createdDate.substr(0, 10);
+  const confirm = createdDate.substr(0, 19);
 
   const dateValues = {
     "date": dateValue,
@@ -161,13 +161,13 @@ router.get("/goToUpdate", authJwt, async (req, res) => {
   if (req.id == post.userId) {
     //날짜 처리
     let createdDate = post.createdAt.toISOString();
-    const date = createdDate.substr(0, 10);
+    const date = createdDate.substr(0, 19);
     createdDate = post.date.toISOString();
-    const dateValue = createdDate.substr(0, 10);
+    const dateValue = createdDate.substr(0, 19);
     createdDate = post.period.toISOString();
-    const period = createdDate.substr(0, 10);
+    const period = createdDate.substr(0, 19);
     createdDate = post.confirm.toISOString();
-    const confirm = createdDate.substr(0, 10);
+    const confirm = createdDate.substr(0, 19);
 
     const dateValues = {
       date: dateValue,
