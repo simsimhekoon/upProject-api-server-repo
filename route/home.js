@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
     if(imsi){
         imgUrl[i] = await getImageData.getImageData(postId);
     } else {
-        imgUrl[i] = process.env.NOIMG;
+        imgUrl[i] = await getImageData.getNoImg();
     }
     
   }

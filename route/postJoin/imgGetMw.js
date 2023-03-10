@@ -65,6 +65,14 @@ const getImageData = async (postId) => {
   }
 };
 
+const getNoImg = async () => {
+  const bucketName = "simsimbucket";
+  const key = "noImg.png";
+
+  imgUrl = await getImageAsync(bucketName, key);
+  return imgUrl.url;
+}
+
 module.exports = {
-  getImageData
+  getImageData, getNoImg
 };
