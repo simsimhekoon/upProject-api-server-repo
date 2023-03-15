@@ -1,3 +1,5 @@
+@import "reset.css";
+
 html {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
@@ -5,25 +7,38 @@ html {
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-form {
-  margin: 16px auto;
-  width: 360px;
+body {
+  background-color: #d1d1d1;
+}
+
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #d1d1d1;
+  height: 100vh;
 }
 
-.form {
+form {
+  max-width: 600px;
   width: 100%;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
+
 
 label {
   color: #2c2c2c;
   display: block;
-  margin: 16px 0 8px;
+  margin: 16px 0;
+  font-size: 16px;
 }
 
 input {
@@ -35,6 +50,7 @@ input {
   margin: 8px 0;
   padding: 16px 24px;
   width: 100%;
+  border-radius: 20px;
 }
 
 .title {
@@ -55,6 +71,7 @@ button {
   margin: 24px 0;
   padding: 16px;
   width: 100%;
+  border-radius: 20px;
 }
 
 .text {
@@ -85,13 +102,38 @@ button {
   display: none;
 }
 
-/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (max-width:767px) {
-  .form {
-    width: 90%;
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) {
+  form {
+    max-width: 400px;
+    width: 100%;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   }
 
-  input {
-    padding: 10px 20px;
+  .container {
+    margin: 10% 0;
+    height: 100%;
   }
+}
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width:767px) {
+  form {
+    max-width: 400px;
+    width: 100%;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .container {
+    margin: 10% 0;
+    height: 100%;
+  }
+
+
 }

@@ -12,19 +12,38 @@ html {
   font-weight: 400;
 }
 
+body {
+  background-color: #d1d1d1;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 form {
-  margin: auto;
-  width: 360px;
+  max-width: 850px;
+  width: 100%;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .form {
-  width: 100%;
+  width: 400px;
 }
 
 label {
   display: block;
-  margin: 16px 0 8px;
-  font-size: 16px;
+  margin: 16px 0;
+  font-size: 14px;
   font-weight: 400;
   color: #2c2c2c;
 }
@@ -35,6 +54,7 @@ input {
   border: 1px solid #d1d1d1;
   width: 100%;
   margin: 8px 0;
+  border-radius: 25px;
 }
 
 button {
@@ -47,12 +67,13 @@ button {
   color: white;
   width: 100%;
   margin: 24px 0;
+  border-radius: 25px;
 }
 
 /* DDEEP 로고 */
-h1 img {
-  width: 100%;
-  height: 100%;
+.logo {
+  width: 400px;
+  margin-right: 25px;
 }
 
 .question {
@@ -75,12 +96,58 @@ h1 img {
   color: #ababab;
 }
 
-/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (max-width:767px) {
+/* 테블릿 가로, 테블릿 세로 (해상도 651px ~ 1023px)*/
+@media all and (min-width:651px) and (max-width:1023px) { 
+
+  form {
+    display: block;
+    max-width: 800px;
+    width: 100%;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
+  .container {
+    margin: 10% 0;
+    height: 100%;
+  }
+
+  .logo {
+    width: 100%;
+  }
   .form {
-    width: 90%;
+    width: 100%;
   }
-  input {
-    padding: 10px 20px;
-  }
+
 }
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 650px)*/
+@media all and (max-width:650px) {
+
+  form {
+    display: block;
+    max-width: 400px;
+    width: 100%;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  }
+
+  .logo {
+    width: 100%;
+  }
+  .form {
+    width: 100%;
+  }
+
+
+  /* DDEEP 로고 데스크탑 */
+  @media all and (min-width:1024px) {
+    .logo {
+      width: 400px;
+    }
+  }

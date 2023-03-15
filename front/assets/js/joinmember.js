@@ -3,7 +3,6 @@ const password = document.querySelector('#password');
 const passwordRepeat = document.querySelector('#password-repeat');
 const textError = document.querySelector('#errorText')
 const textTrue = document.querySelector('#trueText')
-const btn = document.querySelector('.btn')
 
 
 const test = () => {
@@ -12,6 +11,9 @@ const test = () => {
     textTrue.style.display = 'none';
   } else {
     textTrue.style.display = 'block';
+    textError.style.display = 'none';
+  } if (password.value == "") {
+    textTrue.style.display = 'none';
     textError.style.display = 'none';
   }
 };
@@ -72,5 +74,6 @@ const joinCheck = () => {
   
 
 };
-
+// 버튼 전송
+const btn = document.querySelector('.btn')
 btn.addEventListener('click', joinCheck);
