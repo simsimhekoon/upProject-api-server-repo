@@ -1,0 +1,489 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+body {
+    padding-top:85px;
+} 
+
+ul,li {
+    list-style: none;
+}
+
+dl{ 
+    border-bottom: 1px solid #ededed;
+}
+
+dt{
+    display: inline-block;
+    font-weight: 700;
+}
+
+dd{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/*메뉴바*/
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display:flex;
+    justify-content: space-between;
+}
+
+nav{ 
+    /*메뉴바 아래 선  넣을지말지*/ 
+    border-bottom: 1px solid #ededed; 
+    padding: 20px;
+    background: #f5f5f5;
+    opacity: 98%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+nav>img {
+    margin: 0;
+}
+
+.mo-menu{
+    font-weight:700px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.mo-menu li{
+    padding-left: 20px;
+}
+
+
+
+/*전체 감싸는, 페이지가 가운데 정렬 되도록 하기 위해 만듦*/
+.mo-body{
+    width: 880px;
+    margin:0 auto;
+    display: flex;
+}
+
+.mo-title{
+padding:25px 0 25px 0;
+border-bottom: 1px solid #ededed;
+}
+
+.mo-title>p{
+    margin-top: 3px;
+}
+
+.mo-container dl{
+    display: flex;
+    width: 300%;
+    max-width: 580px;
+}
+
+/*사이드 바*/
+.mo-side {
+    position: sticky;
+    padding: 40px 30px;
+    border-left: 1px solid #999;
+    width: 60%;
+
+}
+
+.mo-side dl{
+    padding: 10px;
+}
+
+.side-cont{
+    border-bottom: 1px solid #999;
+}
+
+.side-cont>dl:last-child{
+    border-bottom: none;
+}
+
+/*내부 링크*/
+
+.a-wrap{
+    display: inline-block;
+    }
+
+    img{margin:30px;
+    }
+
+    .mo-container{
+        display: table;
+    }
+    
+    /*
+    .mo-container dt:first-child{
+        width: 100%;
+    }*/
+    .mo-container dt{
+        display: table-cell;
+        width: 30%;
+        padding: 20px;
+        max-width: 130px;
+        min-width: 130px;
+    }
+
+    .mo-container dd{
+        display: table-cell; 
+        width: 100%;
+        padding: 20px;
+}
+    .a-wrap>a{
+        display: inline-block;
+        border-bottom: 1px solid #ededed;
+        width: 100%;
+        padding: 10px;
+    }
+
+    
+
+    .a-wrap{
+        width: 100%;
+    }
+
+    /*신청합니다 버튼*/
+    .accept{display: inline-block;
+        text-align: center;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        font-size: 1.4rem;
+        background-color: #000;
+        color: #fff;
+        margin-top: 5px;
+        
+    }
+    /*멤버 현황*/
+    .mo-member{
+        text-align: center;
+        margin-top: 50px;
+        background-color: #ededed;
+        width: 100%;
+        height: 300px;
+        border-radius: 10px;
+        box-shadow: rgba(0,0,0,0.16) 0px 1px 4px
+        
+    }
+    
+    .mo-member>p{
+        padding: 8px;
+        font-weight: 700;
+    }
+
+/*리스트*/
+
+/*
+.board_wrap {
+    width: 880px;
+    margin:0 auto;
+}
+
+.board_title{
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.board_title strong {
+    font-size: 2rem;
+}
+
+.board_title p {
+    margin-top:5px; 
+    font-size: 1.3rem;
+}
+
+.bt_wrap{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0px ;
+    
+}
+
+.bt_wrap a {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.2rem;
+
+}
+
+.bt_wrap a : :first-child {
+    margin-left:0px;
+}
+
+.bt_wrap a.on {
+    background: #000;
+    color: #fff;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid #000;
+}
+
+.board_list>div {
+    border-bottom: 1px solid #ddd;
+    font-size: 0;
+
+}
+
+.board_list>div.top {
+    border-color: #999;
+}
+
+.board_list>div:last-child {
+    border-bottom: 1px solid #000;
+}
+
+.board_list>div>div {
+    display: inline-block;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.board_list>div.top >div{
+    font-weight: 600;
+}
+
+.board_list .num {
+    width: 10%;
+
+}
+.board_list .title{
+    width: 60%;
+    text-align: left;
+}
+
+.board_list .top .title{
+    text-align: center;
+}
+
+.board_list .writer {
+    width: 10%;
+
+}
+.board_list .date {
+    width: 10%;
+
+}
+.board_list .count{
+    width: 10%;
+
+}
+
+.board_page {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+}
+
+.board_page a {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    border-left: 0;
+    line-height: 100%;
+    
+}
+
+.board_page a .bt{
+    padding-top: 10px;
+    font-size: 1.2rem;
+    letter-spacing: -1px;
+}
+
+.board_page a.num {
+    padding-top: 9px;
+    font-size: 1.2rem;
+}
+
+.board_page a.num.on {
+    border-color:  #000;
+    background: #000;
+    color:#fff;
+}
+
+.board_page a:first-child {
+
+    border-left: 1px solid #ddd;
+}
+*/
+
+/*글쓰기 게시판*/
+.hong_wrap {
+    width: 880px;
+    margin:0 auto;
+}
+
+.hong_title{
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.hong_title strong {
+    font-size: 2rem;
+}
+
+.hong_title p {
+    margin-top:5px; 
+    font-size: 1.3rem;
+}
+
+.hong_write .title input[type="text"] {
+    width: 80%;
+} 
+.hong_write .title dl{
+border-bottom:none;
+width: 100%;
+}
+
+
+.hong_write .title {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    
+}
+
+
+.hong_write .title #area{
+    height: 37px;
+}
+
+
+.hong_write {
+    width: 100%;
+    border-top: 2px solid #000;
+}
+
+.hong_write .title,
+.hong_write .info{
+    padding: 15px;
+}
+
+.hong_write .info{
+    border-top: 1px dashed #ddd;
+    border-bottom: 2px solid #000;
+    font-size: 0;
+}
+
+.hong_write .info input[type="date"]{
+    height: 37px;
+}
+
+.hong_write .info dl{
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+    border-bottom:none;
+    padding: 6px;
+}
+
+.hong_write .title dt,
+.hong_write .title dd,
+.hong_write .info dt,
+.hong_write .info dd{
+    display:inline-block;
+    vertical-align: middle;
+    font-size: 1.1rem;
+}
+
+.hong_write .title dt,
+.hong_write .info dt {
+    width: 100px;
+}
+   
+
+.hong_write .title dl {
+    font-size: 0;
+}
+.hong_write .title dd{
+    width: calc(100% - 100px);
+}
+
+.hong_write .title input[type="text"],
+.hong_write .info input[type="text"],
+.hong_write .info select#area{
+padding: 10px;
+box-sizing: border-box;
+}
+
+.hong_write .address,
+.hong_write .cont,
+.hong_write .add{
+    padding: 15px;
+    border-bottom: 1px solid #000;
+}
+
+.hong_write .address p,
+.hong_write .cont p,
+.hong_write .add p{
+    font-weight: 700;
+    margin: 10px;
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+}
+
+
+.hong_write .address textarea{
+    display: block;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+}
+
+.hong_write .cont{
+    border-bottom: 1px solid #000;
+}
+
+.hong_write .cont textarea,
+.hong_write .add textarea
+{
+    display: block;
+    width: 100%;
+    height: 300px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 0;
+    resize: vertical;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.hong_write .file_box{
+    border-bottom: 1px solid #000;
+}
+
+.hong_write input[type="file"]{
+    margin: 30px;
+    display: inline-block;
+}
