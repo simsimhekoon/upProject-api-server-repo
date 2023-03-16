@@ -94,14 +94,5 @@ router.get('/logOut', async (req, res) => {
   }
 });
 
-//jwt요청 ex -> profile불러오기
-router.get('/profile', authJwt, async (req, res) => {
-  console.log("유효성 검사 성공");
-  const id = req.num;
-  const editProfile = await User.findOne({ where: { id } });
-
-  res.render('profile', { Profile: editProfile });
-});
-
 
 module.exports = router;
