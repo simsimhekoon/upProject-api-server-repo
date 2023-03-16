@@ -188,7 +188,7 @@ router.get("/goToUpdate", authJwt, async (req, res) => {
 
       res.render("./postJoin/update", { post: post, date: date, dateValues: dateValues, imgUrl: imgUrl });
     } else {
-      res.render("./postJoin/update", { post: post, date: date, dateValues: dateValues, imgUrl: " " });
+      res.render("./postJoin/update", { post: post, date: date, dateValues: dateValues, imgUrl: "" });
     }
   } else {
     res.send(
