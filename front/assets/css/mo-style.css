@@ -101,8 +101,13 @@ border-bottom: 1px solid #ededed;
     position: sticky;
     padding: 40px 30px;
     border-left: 1px solid #999;
-    width: 60%;
+    max-width: 30%;
+    min-width: 30%;
 
+}
+
+.view{
+    min-width: 70%;
 }
 
 .mo-side dl{
@@ -219,6 +224,19 @@ border-bottom: 1px solid #ededed;
     
 }
 .bt_wrap button {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #000;
+
+}
+
+.bt_wrap div {
     display: inline-block;
     min-width: 80px;
     margin-left: 10px;

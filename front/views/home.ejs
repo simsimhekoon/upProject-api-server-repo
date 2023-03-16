@@ -68,7 +68,7 @@
     <div class="content">
       <section>
         <div class="ad-banner">
-          광고 받습니다.
+          ↓↓↓클릭하면 이동!↓↓↓
         </div>
       </section>
       <section>
@@ -83,16 +83,49 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="<%=imgUrl[0]%>" class="d-block w-100" alt="...">
-              <div>test1</div>
+              <a href="/post/postJoin/view?id=<%=data[0].id%>&num=1">
+                <div class="mainSlide">
+                    <div class="slideImg">
+                      <img src="<%=imgUrl[0]%>" alt="...">
+                    </div>
+                    <div class="slideText" style="border: 1px solid white;">
+                    제목 : <%=data[0].title%></br></br></br>
+                    장소 : <%=data[0].place%></br></br></br>
+                    예정모집인원 : <%=data[0].limit%> 명</br>
+                    <p style="color: red; margin-top: 150px;" id="limitTime1">남은시간</p>
+                  </div>
+                </div>
+              </a>
             </div>
             <div class="carousel-item">
-              <img src="<%=imgUrl[1]%>" class="d-block w-100" alt="...">
-              <div>test2</div>
+              <a href="/post/postJoin/view?id=<%=data[1].id%>&num=1">
+                <div class="mainSlide">
+                  <div class="slideImg">
+                    <img src="<%=imgUrl[1]%>" alt="...">
+                  </div>
+                  <div class="slideText" style="border: 1px solid white;">
+                    제목 : <%=data[1].title%></br></br></br>
+                    장소 : <%=data[1].place%></br></br></br>
+                    예정모집인원 : <%=data[1].limit%> 명</br>
+                    <p style="color: red; margin-top: 150px;" id="limitTime2">남은시간</p>
+                  </div>
+                </div>
+              </a>
             </div>
             <div class="carousel-item">
-              <img src="<%=imgUrl[2]%>" class="d-block w-100" alt="...">
-              <div>test3</div>
+            <a href="/post/postJoin/view?id=<%=data[2].id%>&num=1">
+                <div class="mainSlide">
+                  <div class="slideImg">
+                    <img src="<%=imgUrl[2]%>" alt="...">
+                  </div>
+                  <div class="slideText" style="border: 1px solid white;">
+                    제목 : <%=data[2].title%></br></br></br>
+                    장소 : <%=data[2].place%></br></br></br>
+                    예정모집인원 : <%=data[2].limit%> 명</br>
+                    <p style="color: red; margin-top: 150px;" id="limitTime3">남은시간</p>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -123,24 +156,6 @@
 
     <br>
 
-    <form action="/list/list/getList" id="listtest" method="get">
-        <button type="submit" form="listtest">view list!!!!</button>
-    </form>
-
-    <br>
-
-    <form action="/imgTest" id="imgTest" method="get">
-        <button type="submit" form="imgTest">go to imgTest!</button>
-    </form>
-
-    <br>
-
-    <form action="/imgGet" id="imgGet" method="get">
-        <button type="submit" form="imgGet">Get Img Test!</button>
-    </form>
-
-    <br>
-
     <form action="/login/signUp/delete" id="deletetest" method="get">
         <button type="submit" form="deletetest">회원 탈퇴!!!!</button>
     </form>
@@ -157,5 +172,43 @@
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
     crossorigin="anonymous"></script>
 </body>
+
+<script>
+
+function CountDownTimer(dt, id) {
+     var end = new Date(dt);
+     var _second = 1000;
+     var _minute = _second * 60;
+     var _hour = _minute * 60;
+     var _day = _hour * 24;
+     var timer;
+     function showRemaining() {
+         var now = new Date();
+         var distance = end - now;
+         if (distance < 0) {
+             clearInterval(timer);
+             document.getElementById(id).innerHTML = '모집 마감됨';
+             return;
+         }
+         var days = Math.floor(distance / _day);
+         var hours = Math.floor((distance % _day) / _hour);
+         var minutes = Math.floor((distance % _hour) / _minute);
+         var seconds = Math.floor((distance % _minute) / _second);
+         document.getElementById(id).innerHTML = days + '일 ';
+         document.getElementById(id).innerHTML += hours + '시간 ';
+         document.getElementById(id).innerHTML += minutes + '분 ';
+         document.getElementById(id).innerHTML += seconds + '초';
+     }
+     timer = setInterval(showRemaining, 1000);
+ }
+
+ const TIME1 = "<%=data[0].period%>";
+ const TIME2 = "<%=data[1].period%>";
+ const TIME3 = "<%=data[2].period%>";
+ CountDownTimer(TIME1, 'limitTime1');
+ CountDownTimer(TIME2, 'limitTime2');
+ CountDownTimer(TIME3, 'limitTime3');
+
+</script>
 
 </html>

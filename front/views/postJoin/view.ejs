@@ -11,7 +11,7 @@
     <header>
         
         <nav>
-            <img src="/images/DDEEP_LOGO.png" width="8%">
+            <img src="/images/DDEEP_LOGO.png" width="8%" onclick="goToHome()"><script>function goToHome(){location.href="/home"}</script>
             <ul class="mo-menu">
             <li><a href="/post/postJoin/getPostList/1" >모집</a></li>
             <li><a href="/post/post/getPostList/1" >자유</a></li>
@@ -22,7 +22,7 @@
     </header>
 
     <div class="mo-body">
-        <main>
+        <main class="view">
             <%
                 let data = post;
             %>
@@ -30,7 +30,9 @@
                 <h1><%=data.title%></h1>
                 <p><%=data.subtitle%></p>
             </div>
-            <img src=<%=imgUrl%> width="60%" >
+            <%if(imgUrl){%>
+                <img src=<%=imgUrl%> width="60%">
+            <%}%>
             <div class="mo-container">
                 <dl>
                     <dt id="장소">장소</dt>
@@ -58,11 +60,11 @@
                 </dl>
                 <dl>
                     <dt>일자</dt>
-                    <dd><%=date%></dd>
+                    <dd><%=date.substr(0,10)%></dd>
                 </dl>
                 <dl>
                     <dt>신청기한</dt>
-                    <dd><%=dateValues.period%> 까지</dd>
+                    <dd><%=dateValues.period.substr(0,10)%> / <%=dateValues.period.substr(11,19)%> 까지</dd>
                 </dl>
                 <dl>
                     <dt>인원 수</dt>
@@ -70,7 +72,7 @@
                 </dl>
                 <dl>
                     <dt>결과 발표</dt>
-                    <dd><%=dateValues.confirm%></dd>
+                    <dd><%=dateValues.confirm.substr(0,10)%> / <%=dateValues.confirm.substr(11,19)%></dd>
                 </dl>
             </div>
             <div class="a-wrap">
@@ -95,6 +97,9 @@
 </body>
 
 <script>
+
+
+
     function goToJoin(nowId, userId, id, num) {
         if(nowId == userId){
             alert("모집 당사자입니다.");

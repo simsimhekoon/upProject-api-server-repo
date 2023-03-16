@@ -15,8 +15,9 @@ router.get("/", async (req, res) => {
     order: [["period", "DESC"]],
     offset: 0,
     limit: 3,
-    attributes: ["id"],
   });
+
+  // "/post/postJoin/view?id=<%=data.id%>&num=<%=count+1%>"
 
   let postId;
   let imsi;
@@ -36,7 +37,7 @@ router.get("/", async (req, res) => {
     
   }
 
-  res.render("home", { imgUrl: imgUrl });
+  res.render("home", { imgUrl: imgUrl, data: recommend });
 });
 
 

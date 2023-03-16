@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홍보게시판</title>
+    <title>모집게시판</title>
     <link rel="stylesheet" href="/css/mo-css.css">
 </head>
 <body>
     <header>
         
         <nav>
-            <img src="/images/DDEEP_LOGO.png" width="8%">
+            <img src="/images/DDEEP_LOGO.png" width="8%" onclick="goToHome()"><script>function goToHome(){location.href="/home"}</script>
             <ul class="mo-menu">
             <li><a href="/post/postJoin/getPostList/1" >모집</a></li>
             <li><a href="/post/post/getPostList/1" >자유</a></li>
@@ -22,8 +22,8 @@
     </header>
     <div class="hong_wrap">
         <div class="hong_title"> 
-            <strong> 홍보게시판 </strong>
-            <P> 더큰내일센터 7기 인재들의 홍보게시판입니다.</P>
+            <strong> 모집게시판 </strong>
+            <P> 더큰내일센터 7기 인재들의 모집게시판입니다.</P>
         </div>
         <form action="/post/postJoin/write" id="write" method="post" enctype="multipart/form-data">
             <div class="hong_write_wrap">
@@ -41,45 +41,89 @@
                     <div class="info">
                         <dl>
                             <dt>인원 수</dt>
-                            <dd><input type="text" placeholder="인원 수 입력" name="limit"></dd>
+                            <dd><input type="number" min="0" placeholder="인원 수 입력" id="limit" name="limit"></dd>
                         </dl>
                         <dl>
                             <dt> 일자</dt>
-                            <dd><input type="datetime-local" name="date"></dd>
+                            <dd><input type="datetime-local" name="date" id="date"></dd>
                         </dl>
                         <dl>
                             <dt> 신청기한</dt>
-                            <dd><input type="datetime-local" name="period"></dd>
+                            <dd><input type="datetime-local" name="period" id="period"></dd>
                             
                         </dl>
                         <dl>
                             <dt>결과 발표</dt>
-                            <dd><input type="datetime-local" name="confirm"></dd>
+                            <dd><input type="datetime-local" name="confirm" id="confirm"></dd>
                         </dl>
                     </div>
                     <div class="address">
                         <p>장소</p>
-                        <textarea placeholder="장소 입력" name="place"></textarea>
+                        <textarea placeholder="장소 입력" name="place" id="place"></textarea>
                     </div>
                     <div class="cont">
                         <p>세부 내용</p>
-                        <textarea placeholder="내용 입력" name="content"></textarea>
+                        <textarea placeholder="내용 입력" name="content" id="content"></textarea>
                     </div>
                     <div class="add">
                         <p>추가 안내 사항</p>
-                        <textarea placeholder="추가 안내 사항 입력" name="ps"></textarea>
+                        <textarea placeholder="추가 안내 사항 입력" name="ps" id="ps"></textarea>
                     </div>
                     <div class="file_box">
-                        <input type="file" name="image" id="image" accept="image/*">
+                        </br>
+                        <p>현재 이미지</p>
+                            <div id = img><img src=""></div>
+                        <input type="file" name="image" id="image" accept="image/*" onchange="loadFile(this)">
                     </div>
-                    
-
                     <div class="bt_wrap">
-                        <button type="submit" form="write" class="on">등록</button>
+                        <!-- <button type="submit" form="write" class="on" id="submit">등록</button> -->
+                        <div class="on" id="submit">등록</div>
                         <a href="/post/postJoin/getPostList/1">취소</a> 
                     </div>
+                </div>
             </div>
         </form>
     </div>
+    </br>
+    </br>
 </body>
+
+<script>
+    function loadFile(input) {
+        let file = input.files[0];	//선택된 파일 가져오기
+
+        let newImage = document.querySelector("#img").firstChild;
+
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file);
+    };
+
+
+    
+    document.querySelector("#submit").addEventListener("click", submit);
+    function submit(){
+        if(!document.querySelector("#title").value){
+            alert("제목을 입력해주세요!");
+        } else if(!document.querySelector("#subtitle").value){
+            alert("소제목을 입력해주세요!");
+        } else if(!document.querySelector("#limit").value){
+            alert("인원 수를 입력해주세요!");
+        } else if(!document.querySelector("#date").value){
+            alert("일자를 입력해주세요!");
+        } else if(!document.querySelector("#period").value){
+            alert("신청기한을 입력해주세요!");
+        } else if(!document.querySelector("#confirm").value){
+            alert("결과발표일을 입력해주세요!");
+        } else if(!document.querySelector("#place").value){
+            alert("장소를 입력해주세요!");
+        } else if(!document.querySelector("#content").value){
+            alert("내용을 입력해주세요!");
+        } else if(!document.querySelector("#ps").value){
+            alert("추가 안내사항을 입력해주세요!");
+        } else {
+            document.querySelector("#write").submit();
+        }
+    }
+</script>
+
 </html>
