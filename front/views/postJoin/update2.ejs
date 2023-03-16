@@ -4,30 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홍보게시판</title>
-    <link rel="stylesheet" href="/css/mo-css.css">
+    <title>자유게시판</title>
+    <link rel="stylesheet" href="/css/css.css">
 </head>
 <body>
-    <header>
-        
-        <nav>
-            <img src="/images/DDEEP_LOGO.png" width="8%">
-            <ul class="mo-menu">
-            <li><a href="/post/postJoin/getPostList/1" >모집</a></li>
-            <li><a href="/post/post/getPostList/1" >자유</a></li>
-            <li><a href="/login/jwtLogin/logOut">로그아웃</a></li>
-            
-            </ul>
-            </nav>
-    </header>
-    <div class="hong_wrap">
-        <div class="hong_title"> 
-            <strong> 홍보게시판 </strong>
-            <P> 더큰내일센터 7기 인재들의 홍보게시판입니다.</P>
+    <div class="board_wrap">
+        <div class="board_title"> 
+            <strong> 자유게시판 </strong>
+            <P> 더큰내일센터 7기 인재들의 자유게시판입니다.</P>
         </div>
         <form action="/post/postJoin/update?id=<%=post.id%>" id="update" method="post" enctype="multipart/form-data">
-            <div class="hong_write_wrap">
-                <div class="hong_write">
+            <div class="board_write_wrap">
+                <div class="board_write">
                     <div class="title">
                         <dl>
                             <dt>제목</dt>
@@ -40,55 +28,58 @@
                     </div>
                     <div class="info">
                         <dl>
-                            <dt>인원 수</dt>
-                            <dd><input type="text" value='<%=post.limit%>' name="limit"></dd>
+                            <dt>글쓴이</dt>
+                            <dd><input type="text" placeholder='<%=post.name%>' readonly></dd>
                         </dl>
                         <dl>
-                            <dt> 일자</dt>
-                            <dd><input type="datetime-local" value='<%=dateValues.date%>' name="date"></dd>
+                            <dt>장소</dt>
+                            <dd><input type="text" value='<%=post.place%>' name="place"></dd>
                         </dl>
-                        <dl>
-                            <dt> 신청기한</dt>
-                            <dd><input type="datetime-local" value='<%=dateValues.period%>' name="period"></dd>
-                            
-                        </dl>
-                        <dl>
-                            <dt>결과 발표</dt>
-                            <dd><input type="datetime-local" value='<%=dateValues.confirm%>' name="confirm"></dd>
-                        </dl>
-                    </div>
-                    <div class="address">
-                        <p>장소</p>
-                        <textarea placeholder="장소 입력" name="place"><%=post.place%></textarea>
                     </div>
                     <div class="cont">
-                        <p>세부 내용</p>
-                        <textarea placeholder="내용 입력" name="content"><%=post.content%></textarea>
+                        <textarea id="content" name="content"><%=post.content%></textarea>
                     </div>
-                    <div class="add">
-                        <p>추가 안내 사항</p>
-                        <textarea placeholder="추가 안내 사항 입력" name="ps"><%=post.ps%></textarea>
+                    <div class="cont">
+                        <textarea id="ps" name="ps"><%=post.ps%></textarea>
                     </div>
-                    <div class="file_box">
-                        </br>
-                        <p>현재 이미지</p>
-                        <div id = img><img src="<%=imgUrl%>"></div>
-                        <input type="file" name="image" id="image" accept="image/*">
-                        <dl class="deleteCheck">
-                            <label for="deleteCheck">이미지 삭제</label>
-                            <dd><input type="text" name="deleteCheck" id="deleteCheck" value="false" style="display: none;"></dd>
-                        </dl>  
-                    </div>
-                    
+                    <div id = img><img src="<%=imgUrl%>"></div>
+                    <dl>
+                        <dt>일자</dt>
+                        <dd><input type="datetime-local" value='<%=dateValues.date%>' name="date"></dd>
+                    </dl>
+                    <dl>
+                        <dt>신청기한</dt>
+                        <dd><input type="datetime-local" value='<%=dateValues.period%>' name="period"></dd>
+                    </dl>
+                    <dl>
+                        <dt>인원수</dt>
+                        <dd><input type="text" value='<%=post.limit%>' name="limit"></dd>
+                    </dl>
+                    <dl>
+                        <dt>결과 발표</dt>
+                        <dd><input type="datetime-local" value='<%=dateValues.confirm%>' name="confirm"></dd>
+                    </dl>
+                    <dl>
+                        <dt>이미지 업로드</dt>
+                        <dd id="change"><input type="file" name="image" id="image" accept="image/*" onchange="loadFile(this)"></dd>
+                    </dl>
+
+                    <br>
+
+                    <dl>
+                        <label for="deleteCheck">이미지 삭제</label>
+                        <dd><input type="text" name="deleteCheck" id="deleteCheck" value="false" style="display: none;"></dd>
+                    </dl>  
 
                     <div class="bt_wrap">
                         <button type="submit" form="update" class="on">수정</button>
                         <a href="/post/postJoin/getPostList/1">취소</a> 
                         <div id="test" onclick="goToDelete('<%=post.id%>','<%=post.userId%>')"%>>삭제</div>
                     </div>
+                </div>
             </div>
         </form>
-    </div>
+    <div>
 </body>
 
 <script>
@@ -125,5 +116,5 @@
         document.querySelector('#deleteCheck').value="false";
     };
 </script>
-
+<!-- <script src="/js/post.js"></script> -->
 </html>

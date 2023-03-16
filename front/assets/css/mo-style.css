@@ -190,9 +190,9 @@ border-bottom: 1px solid #ededed;
         font-weight: 700;
     }
 
-/*리스트*/
+/*리스트********************************************************************************/
 
-/*
+
 .board_wrap {
     width: 880px;
     margin:0 auto;
@@ -218,6 +218,18 @@ border-bottom: 1px solid #ededed;
     font-size: 0px ;
     
 }
+.bt_wrap button {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #000;
+
+}
 
 .bt_wrap a {
     display: inline-block;
@@ -230,7 +242,7 @@ border-bottom: 1px solid #ededed;
 
 }
 
-.bt_wrap a : :first-child {
+.bt_wrap a :first-child {
     margin-left:0px;
 }
 
@@ -334,9 +346,9 @@ border-bottom: 1px solid #ededed;
 
     border-left: 1px solid #ddd;
 }
-*/
 
-/*글쓰기 게시판*/
+
+/*글쓰기 ----------------------------------------------------------------- 게시판*/
 .hong_wrap {
     width: 880px;
     margin:0 auto;
@@ -486,4 +498,36 @@ box-sizing: border-box;
 .hong_write input[type="file"]{
     margin: 30px;
     display: inline-block;
+}
+
+
+#img{
+    max-width: 50%;
+    max-height: 50%;
+    border: 1px solid #000;
+    overflow: hidden;
+}
+
+#img img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+.deleteCheck {
+    width: 132px;
+    height: 30px;
+    background-color: antiquewhite;
+    border: 1px solid black;
+    border-radius: 10%;
+    margin-left: 30px;
+    position: relative;
+}
+
+.deleteCheck label{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
