@@ -82,6 +82,8 @@
               aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
+
+          
             <div class="carousel-item active">
               <a href="/post/postJoin/view?id=<%=data[0].id%>&num=1">
                 <div class="mainSlide">
@@ -97,6 +99,8 @@
                 </div>
               </a>
             </div>
+
+            
             <div class="carousel-item">
               <a href="/post/postJoin/view?id=<%=data[1].id%>&num=1">
                 <div class="mainSlide">
@@ -112,25 +116,31 @@
                 </div>
               </a>
             </div>
+
+
             <div class="carousel-item">
             <a href="/post/postJoin/view?id=<%=data[2].id%>&num=1">
-                <div class="mainSlide">
-                  <div class="slideImg">
-                    <img src="<%=imgUrl[2]%>" alt="...">
-                  </div>
-                  <div class="slideText" style="border: 1px solid white;">
-                    제목 : <%=data[2].title%></br></br></br>
-                    장소 : <%=data[2].place%></br></br></br>
-                    예정모집인원 : <%=data[2].limit%> 명</br>
-                    <p style="color: red; margin-top: 150px;" id="limitTime3">남은시간</p>
-                  </div>
+              <div class="mainSlide">
+                <div class="slideImg">
+                  <img src="<%=imgUrl[2]%>" alt="...">
                 </div>
-              </a>
+                <div class="slideText" style="border: 1px solid white;">
+                  제목 : <%=data[2].title%></br></br></br>
+                  장소 : <%=data[2].place%></br></br></br>
+                  예정모집인원 : <%=data[2].limit%> 명</br>
+                  <p style="color: red; margin-top: 150px;" id="limitTime3">남은시간</p>
+                </div>
+              </div>
+            </a>
             </div>
+
+
           </div>
+
+
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="carousel-control-prev-icon" aria-hidden="true">&gt;</span>
             <span class="visually-hidden">Previous</span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"

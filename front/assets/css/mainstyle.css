@@ -356,3 +356,12 @@ section {
     font: inherit;
     vertical-align: baseline;
 }
+
+
+.carousel-control-next-icon{
+  border: 1px solid rgba(255, 255, 255, .5);
+}
+
+.carousel-control-prev-icon{
+  border: 1px solid rgba(255, 255, 255, .5);  
+}

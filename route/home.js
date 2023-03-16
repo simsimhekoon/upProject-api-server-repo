@@ -3,6 +3,8 @@ const router = express.Router();
 
 const getImageData = require("./postJoin/imgGetMw.js");
 
+const { Op } = require("sequelize");
+
 const db = require("../models");
 const { PostJoin } = db;
 const { PostImg } = db;
@@ -11,13 +13,30 @@ router.use(express.json());
 
 router.get("/", async (req, res) => {
   //홈 화면
+  const nowDate = new Date();
   const recommend = await PostJoin.findAll({
-    order: [["period", "DESC"]],
-    offset: 0,
+    where: {
+      period: {
+        [Op.gt]: nowDate,
+      },
+    },
+    order: [["period", "ASC"]],
     limit: 3,
   });
 
-  // "/post/postJoin/view?id=<%=data.id%>&num=<%=count+1%>"
+  if (recommend.length < 3) {
+    const recommend2 = await PostJoin.findAll({
+      where: {
+        period: {
+          [Op.lte]: nowDate,
+        },
+      },
+      order: [["period", "DESC"]],
+      limit: 3 - recommend.length,
+    });
+
+    recommend.push(...recommend2);
+  }
 
   let postId;
   let imsi;
