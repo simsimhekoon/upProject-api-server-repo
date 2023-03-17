@@ -192,7 +192,7 @@ router.get("/goToUpdate", authJwt, async (req, res) => {
     }
   } else {
     res.send(
-      "<script>alert('작성자만 수정할 수 있습니다.');location.href='/post/postJoin/getPostList/1';</script>"
+      `<script>alert('작성자만 수정할 수 있습니다.');location.href='/post/postJoin/view?id=${id}&num=1';</script>`
     );
   }
 });
@@ -262,7 +262,7 @@ router.post("/update", authJwt, upload.single("image"), async (req, res) => {
   }
 
   res.send(
-    "<script>alert('수정되었습니다.');location.href='/post/postJoin/getPostList/1';</script>"
+    `<script>alert('수정되었습니다.');location.href='/post/postJoin/view?id=${id}&num=1';</script>`
   );
 });
 
